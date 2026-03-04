@@ -1,0 +1,623 @@
+
+<script>
+    sessionStorage.removeItem("selectedCountry")
+    sessionStorage.removeItem("selectedState")
+    sessionStorage.removeItem("selectedMonth")
+    sessionStorage.removeItem("selectedYear")
+</script>
+<!DOCTYPE html>
+<html class="login-pf" lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="title" content="Login | Networking Academy with Cisco">
+        <meta name="description" content="Login to access free online tech courses backed by Cisco's expertise and connected to real career paths. Discover your future today.">
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="Login | Networking Academy with Cisco">
+        <meta property="og:description" content="Login to access free online tech courses backed by Cisco's expertise and connected to real career paths. Discover your future today.">
+        <meta property="og:url" content="">
+
+        <script>
+            document.querySelector('meta[property="og:url"]').setAttribute('content', location.href)
+        </script>
+
+        <script src="/auth/resources/z46j2/login/skillsforall-theme/js/countries.js" type="text/javascript"></script>
+
+
+                <meta name="viewport" content="width=device-width,initial-scale=1"/>
+        <title>Login | Networking Academy with Cisco</title>
+        <link rel="icon" href="/auth/resources/z46j2/login/skillsforall-theme/img/favicon.ico"/>
+                <link href="/auth/resources/z46j2/login/skillsforall-theme/node_modules/patternfly/dist/css/patternfly.min.css" rel="stylesheet"/>
+                <link href="/auth/resources/z46j2/login/skillsforall-theme/node_modules/patternfly/dist/css/patternfly-additions.min.css" rel="stylesheet"/>
+                <link href="/auth/resources/z46j2/login/skillsforall-theme/lib/zocial/zocial.css" rel="stylesheet"/>
+                <link href="/auth/resources/z46j2/login/skillsforall-theme/css/login.css" rel="stylesheet"/>
+                <link href="/auth/resources/z46j2/login/skillsforall-theme/css/cui-standard.min.css" rel="stylesheet"/>
+                <script src="/auth/resources/z46j2/login/skillsforall-theme/js/crs.min.js" type="text/javascript"></script>
+                <script src="/auth/resources/z46j2/login/skillsforall-theme/js/countries.js" type="text/javascript"></script>
+            <script type="module">
+                import { checkCookiesAndSetTimer } from "/auth/resources/z46j2/login/skillsforall-theme/js/authChecker.js";
+
+                checkCookiesAndSetTimer(
+                "67e2ac4c-71e4-48cc-bae0-3c212c2a9123",
+                "9bkZ5ISKYKA",
+                "/auth/realms/skillsforall/login-actions/restart?client_id=b2e-marketplace&amp;tab_id=9bkZ5ISKYKA&amp;skip_logout=true"
+                );
+            </script>
+    </head>
+
+    <body class=" cui" id="sfa-container">
+    <div class="row">
+        <div class="col-lg-7 no-padding">
+            <div class="login_leftImg">
+                <div class="login_banner_block">
+                    <div class="text-weight-300 text-size-28 base-margin-bottom">Build Your Skills With Cisco</div>
+                    <div class="text-weight-300 text-size-16">Pursue real career paths through instructor-led courses taught by experts and free, online courses backed by Cisco&#39;s expertise.</div>
+                    <img src="/auth/resources/z46j2/login/skillsforall-theme/img/netacad_banner.jpg" class="login_banner_image" alt="" />
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 no-padding flex flex-middle flex-center">
+            <div class="login-pf-page width80p">
+                <div class="card-pf">
+                    <div id="goBackVisibility">
+                        <button type="button" class="backArrow" onclick="goBack()" title="Go back">
+                            <span class="icon icon-arrow-left-tail icon-size-18"></span>
+                        </button>
+                        <span class="qtr-margin-left text-gray-700 text-weight-400">Go back</span>
+                    </div>
+                    <header class="login-pf-header">
+                            <div class="flex flex-between">
+                                <div></div>
+                                <div id="kc-locale" class="languageDropdown">
+                                    <div id="kc-locale-wrapper" class="">
+                                        <div class="kc-dropdown" id="kc-locale-dropdown">
+                                            <a href="#" id="kc-current-locale-link">
+                                                <img src="/auth/resources/z46j2/login/skillsforall-theme/img/icon_globe_black.svg" class="globeIcon" alt="" />
+                                                English (English)
+                                            </a>
+                                            <ul>
+                                                    <li class="kc-dropdown-item"><a href="/auth/realms/skillsforall/login-actions/authenticate?client_id=b2e-marketplace&amp;tab_id=9bkZ5ISKYKA&amp;execution=544c98b5-6b03-41d5-b104-b625ecff8ce5&amp;kc_locale=ar">العربية (Arabic)</a></li>
+                                                    <li class="kc-dropdown-item"><a href="/auth/realms/skillsforall/login-actions/authenticate?client_id=b2e-marketplace&amp;tab_id=9bkZ5ISKYKA&amp;execution=544c98b5-6b03-41d5-b104-b625ecff8ce5&amp;kc_locale=pt-BR">Português (Brazilian Portuguese)</a></li>
+                                                    <li class="kc-dropdown-item"><a href="/auth/realms/skillsforall/login-actions/authenticate?client_id=b2e-marketplace&amp;tab_id=9bkZ5ISKYKA&amp;execution=544c98b5-6b03-41d5-b104-b625ecff8ce5&amp;kc_locale=en">English (English)</a></li>
+                                                    <li class="kc-dropdown-item"><a href="/auth/realms/skillsforall/login-actions/authenticate?client_id=b2e-marketplace&amp;tab_id=9bkZ5ISKYKA&amp;execution=544c98b5-6b03-41d5-b104-b625ecff8ce5&amp;kc_locale=fr">Français (French)</a></li>
+                                                    <li class="kc-dropdown-item"><a href="/auth/realms/skillsforall/login-actions/authenticate?client_id=b2e-marketplace&amp;tab_id=9bkZ5ISKYKA&amp;execution=544c98b5-6b03-41d5-b104-b625ecff8ce5&amp;kc_locale=es">Español (Spanish)</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                <div id="kc-page-title">        <div class="text-weight-400 text-size-28 half-margin-bottom decorative_bottom_line">Welcome!</div>
+        <div class="text-weight-300 text-size-16">Please login to your account.</div>
+
+</div>
+                    </header>
+                    <div id="kc-content" class="inp_block">
+                        <div id="kc-content-wrapper">
+
+
+    
+        <div id="kc-form">
+            <div id="kc-form-wrapper">
+                    <form id="kc-form-login" onsubmit="login.disabled = true; return true;" action="https://auth.netacad.com/auth/realms/skillsforall/login-actions/authenticate?session_code=bDAAfytPTEmHP3C3BG2HeQp5ZTjtS81DPyxHzDTs1d4&amp;execution=544c98b5-6b03-41d5-b104-b625ecff8ce5&amp;client_id=b2e-marketplace&amp;tab_id=9bkZ5ISKYKA" method="post">
+                            <div class="form-group">
+                                <div class="form-group__text">
+                                    <label for="username" class="control-label">Email</label>
+
+                                        <input tabindex="1" id="username" class="form-control" name="username" value=""  type="text" autofocus autocomplete="off"
+
+                                        />
+
+                                </div>
+                            </div>
+
+                        <div class="form-group login-pf-settings">
+                            <div id="kc-form-options">
+                            </div>
+                            <div class="">
+                                    <span><a tabindex="4" class="text-weight-400 qtr-margin-top link" href="/auth/realms/skillsforall/login-actions/reset-credentials?client_id=b2e-marketplace&amp;tab_id=9bkZ5ISKYKA">Forgot Password?</a></span>
+                            </div>
+
+                        </div>
+
+                        <div id="kc-form-buttons" class="form-group mob_txt_center">
+                            <input type="hidden" id="id-hidden-input" name="credentialId" />
+                            <input tabindex="3" class="btn btn--primary btn-block btn--large  base-margin-top btn-b2c" name="login" id="kc-login" type="submit" value="Login"/>
+                        </div>
+                    </form>
+            </div>
+
+                <div id="kc-social-providers" class=" mob_txt_center">
+                    <div class="dbl-margin-top dbl-margin-bottom text-weight-300 separatorLine">Or continue with</div>
+
+                    <ul class="login-pf-social list-unstyled login-pf-social-all ">
+                            <li class="login-pf-social-link cus_socialLogin_padding">
+                                <a href="/auth/realms/skillsforall/broker/google/login?client_id=b2e-marketplace&amp;tab_id=9bkZ5ISKYKA&amp;session_code=bDAAfytPTEmHP3C3BG2HeQp5ZTjtS81DPyxHzDTs1d4" id="zocial-google" tabindex="5">
+                                    <img src="/auth/resources/z46j2/login/skillsforall-theme/img/google.svg" class="idp-google" alt="Login using Google"/>
+                                </a>
+                            </li>
+
+
+
+                    </ul>
+                </div>
+        </div>
+
+
+
+
+
+
+                                <div id="kc-info" class="login-pf-signup">
+                                    <div id="kc-info-wrapper" class="">
+                <div id="kc-registration" class="signupTxtAlign">
+                    <span class="hasAccountText">Don&#39;t have an account? <a tabindex="6"
+                       href="/auth/realms/skillsforall/login-actions/registration?client_id=b2e-marketplace&amp;tab_id=9bkZ5ISKYKA" class="link text-weight-400">Sign up</a></span>
+                </div>
+
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+    var getUrlString = window.location.href
+    var newUrlString = new URL(getUrlString);
+    var client_id = newUrlString.searchParams.get("client_id");
+
+    if (window.location.host === "cperfauth.netacad.com") {
+        ENV_URL = "https://cperf.netacad.com"
+        ENV_GRAPHQL = "https://cperfapi.netacad.com/api"
+        GTM_ID = "GTM-N3W9SZQN"
+    } else if (window.location.host === "perfauth.netacad.com") {
+        if (client_id === "gni-prf-postlogin-sp" || client_id === "netacad-service-client"){
+            ENV_URL = "https://gni-prf.netacad.com"
+        } else {
+            ENV_URL = "https://perf.skillsforall.com"
+        }
+        ENV_GRAPHQL = "https://api.perf.socialgoodplatform.com/api"
+        GTM_ID = "GTM-NFKPM3V"
+    } else if (window.location.host === "predevauth.netacad.com") {
+        if (client_id === "instructor_dev_sp_for_oneid" || client_id === "netacad-service-client"){
+            ENV_URL = "https://gni-dev.netacad.com"
+        } else {
+            ENV_URL = "https://predev.skillsforall.com"
+        }
+        ENV_GRAPHQL = "https://preapi.dev.socialgoodplatform.com/api"
+        GTM_ID = "GTM-123456"
+    } else if (window.location.host === "cdevauth.netacad.com") {
+        ENV_URL = "https://cdev.netacad.com"
+        ENV_GRAPHQL = "https://cdevapi.netacad.com/api"
+        GTM_ID = "GTM-MR5DM2DR"
+    } else if (window.location.host === "devauth.netacad.com") {
+        ENV_URL = "https://dev.skillsforall.com"
+        ENV_GRAPHQL = "https://api.dev.socialgoodplatform.com/api"
+        GTM_ID = "GTM-5SGP5VR"
+    } else if (window.location.host === "cqaauth.netacad.com") {
+        ENV_URL = "https://cqa.netacad.com"
+        ENV_GRAPHQL = "https://cqaapi.netacad.com/api"
+        GTM_ID = "GTM-N5TMW28X"
+    } else if (window.location.host === "qaauth.netacad.com") {
+        ENV_URL = "https://qa.skillsforall.com"
+        ENV_GRAPHQL = "https://api.qa.socialgoodplatform.com/api"
+        GTM_ID = "GTM-KJSJCHJ"
+    } else if (window.location.host === "previewauth.netacad.com") {
+        ENV_URL = "https://preview.netacad.com"
+        ENV_GRAPHQL = "https://previewapi.netacad.com/api"
+        GTM_ID = "GTM-W7TZ38TG"
+    } else if (window.location.host === "authornetauth.netacad.com") {
+        ENV_URL = "https://author.netacad.com"
+        ENV_GRAPHQL = "https://authornetapi.netacad.com/api"
+        GTM_ID = "GTM-5GQG9ZT4"
+    } else if (window.location.host === "authorauth.netacad.com") {
+        ENV_URL = "https://author.skillsforall.com"
+        ENV_GRAPHQL = "https://authorapi.dev.socialgoodplatform.com/api"
+        GTM_ID = "GTM-KNQSR9G"
+    } else if (window.location.host === "migrationauth.netacad.com") {
+        ENV_URL = "https://migration.netacad.com"
+        ENV_GRAPHQL = "https://migrationapi.netacad.com/api"
+        GTM_ID = "GTM-12345"
+    } else if (window.location.host === "prodauth.netacad.com") {
+        ENV_URL = "https://prod.netacad.com"
+        ENV_GRAPHQL = "https://api.netacad.com/api"
+        GTM_ID = "GTM-12345"
+    } else if (window.location.host === "gni-prfauth.netacad.com") {
+        ENV_URL = "https://gni-prf.netacad.com"
+        ENV_GRAPHQL = "https://migrationapi.netacad.com/api"
+        GTM_ID = "GTM-12345"
+    } else if (window.location.host === "auth.sgp.com:8080") {
+        ENV_URL = "http://localhost:3001"
+        ENV_GRAPHQL = "http://localhost:3000/api"
+        GTM_ID = "GTM-12345"
+    } else {
+        if (client_id === "gni_sp_for_oneid" || client_id === "netacad-service-client"){
+            ENV_URL = "https://www.netacad.com"
+        } else {
+            ENV_URL = "https://www.netacad.com"
+        }
+        ENV_GRAPHQL = "https://api.netacad.com/api"
+        GTM_ID = "GTM-K9DHLXQ9"
+    }
+    
+    console.log("ENV variables :: :: ", ENV_URL, ENV_GRAPHQL, GTM_ID)
+
+    function goBack() {
+        var url_string = window.location.href
+        var authUrl = new URL(url_string);
+        var redirectUrl = authUrl.searchParams.get("redirect_uri");
+
+        if(authUrl.searchParams.has('redirect_uri')){
+            var str = redirectUrl;
+            var validRedirectUrl = str.replace('/dashboard','').replace('//dashboard','');
+            var getRedirectUrl = new URL(validRedirectUrl);
+          
+            if(domainSpecificUrl(getRedirectUrl.host)) {
+                window.location.href = validRedirectUrl
+            } else {
+                window.location.href = ENV_URL
+            }
+        } else {
+            history.back();
+        }
+    }
+    function domainSpecificUrl(redirectUrl){
+        var expectedDomain = 'skillsforall.com';
+        var expectedNetacadDomain = 'netacad.com';
+        return (
+            redirectUrl === expectedDomain ||
+            redirectUrl.endsWith("." + expectedDomain) ||
+            redirectUrl === expectedNetacadDomain ||
+            redirectUrl.endsWith("." + expectedNetacadDomain)
+        );
+    }
+    function backToHome() {
+        window.location.href = ENV_URL
+    }
+    function checkEmailValidation() {
+            var reg = /^(?=.{1,64}@)[A-Za-z0-9!#$%&*'+/=?^{|}\+_-]+(\.[A-Za-z0-9\+_-]+)*@[^-][A-Za-z0-9\+-]*(\.[A-Za-z0-9\+-]+)*(\.[A-Za-z]{2,})$/;
+            if (reg.test(username.value) == false) {
+                document.getElementById('onSubmitForgotPwd').disabled = true;
+                return false;
+            } else{
+                document.getElementById('onSubmitForgotPwd').disabled = false;
+            }
+            return true;
+    }
+    function closeModal() {
+        const modalAgeGate = document.getElementById('modal-ageGate')
+        if(modalAgeGate){
+            modalAgeGate.classList.add("hide");
+            modalAgeGate.classList.remove("flex", "flex-middle");
+        }
+    }
+    function showInfo() {
+        document.getElementById('reqInfo').classList.remove("hide");
+        document.getElementById('reqInfo').classList.add("dBlock");
+    }
+    function hideInfo() {
+        document.getElementById('reqInfo').classList.add("hide");
+        document.getElementById('reqInfo').classList.remove("dBlock");
+    }
+    setTimeout(
+        function(){
+            if(selectedCountry && selectedState && selectedYear && selectedMonth){
+                document.getElementById('selectCountry').value = selectedCountry;
+                invokePopulateStateSessionStorage();
+                document.getElementById('selectState').value = selectedState;
+                document.getElementById('yearOfBirth').value = selectedYear;
+                document.getElementById('selectMonth').value = selectedMonth;
+            }
+        }, 500
+    )
+
+    var selectedCountry = sessionStorage.getItem("selectedCountry");
+    var selectedState = sessionStorage.getItem("selectedState");
+    var selectedYear = sessionStorage.getItem("selectedYear");
+    var selectedMonth = sessionStorage.getItem("selectedMonth");
+
+    if(selectedCountry && selectedState && selectedYear && selectedMonth){
+        document.getElementById('wizardRegisterForm').classList.remove("hide");
+        document.getElementById('wizardRegisterForm').classList.add("dBlock");
+        document.getElementById('wizardAgeGateForm').classList.add("hide");
+    }
+    async function showRegisterForm() {
+        var selectCountry = document.getElementById('selectCountry').value;
+        var selectState = document.getElementById('selectState').value;
+        var selectYear = document.getElementById('yearOfBirth').value;
+        var selectMonth = document.getElementById('selectMonth').value;
+
+        var isValid = true
+        if (!selectCountry) {
+            document.getElementById("selectCountryErrorMsg").innerHTML = '<div class="form-group__help" role="alert"><span>Please select country or region</span></div>'
+            isValid = false;
+        }
+        if (!selectState) {
+            document.getElementById("selectStateErrorMsg").innerHTML = '<div class="form-group__help" role="alert"><span>Please select state</span></div>'
+            isValid = false;
+        }
+        if (!selectYear) {
+            document.getElementById("selectYearErrorMsg").innerHTML = '<div class="form-group__help" role="alert"><span>Please select year</span></div>'
+            isValid = false;
+        }
+        if (!selectMonth) {
+            document.getElementById("selectMonthErrorMsg").innerHTML = '<div class="form-group__help" role="alert"><span>Please select month</span></div>'
+            isValid = false;
+        }
+        if(!isValid){
+            return false
+        }
+
+        const response = await ageGateValidation( selectCountry, selectYear, selectMonth );
+        console.log("res--", response);
+        const isEligible = response && response.data && response.data.ageGateValidateAge
+
+        if(!isEligible){
+            const modalAgeGate = document.getElementById('modal-ageGate')
+            if(modalAgeGate){
+                modalAgeGate.classList.remove("hide");
+                modalAgeGate.classList.add("flex", "flex-middle");
+            }
+            return
+        }
+
+        sessionStorage.setItem("selectedCountry", selectCountry);
+        sessionStorage.setItem("selectedState", selectState);
+        sessionStorage.setItem("selectedYear", selectYear);
+        sessionStorage.setItem("selectedMonth", selectMonth);
+
+        document.getElementById('wizardRegisterForm').classList.remove("hide");
+        document.getElementById('wizardRegisterForm').classList.add("dBlock");
+        document.getElementById('wizardAgeGateForm').classList.add("hide");
+    }
+    async function ageGateIDP() {
+        var selectCountry = document.getElementById('selectCountry').value;
+        var selectState = document.getElementById('selectState').value;
+        var selectYear = document.getElementById('yearOfBirth').value;
+        var selectMonth = document.getElementById('selectMonth').value;
+
+        var isValid = true
+        if (!selectCountry) {
+            document.getElementById("selectCountryErrorMsg").innerHTML = '<div class="form-group__help" role="alert"><span>Please select country or region</span></div>'
+            isValid = false;
+        }
+        if (!selectState) {
+            document.getElementById("selectStateErrorMsg").innerHTML = '<div class="form-group__help" role="alert"><span>Please select state</span></div>'
+            isValid = false;
+        }
+        if (!selectYear) {
+            document.getElementById("selectYearErrorMsg").innerHTML = '<div class="form-group__help" role="alert"><span>Please select year</span></div>'
+            isValid = false;
+        }
+        if (!selectMonth) {
+            document.getElementById("selectMonthErrorMsg").innerHTML = '<div class="form-group__help" role="alert"><span>Please select month</span></div>'
+            isValid = false;
+        }
+        if(!isValid){
+            return false
+        }
+        const response = await ageGateValidation( selectCountry, selectYear, selectMonth );
+        const isEligible = response && response.data && response.data.ageGateValidateAge
+
+        if(!isEligible){
+            const modalAgeGate = document.getElementById('modal-ageGate')
+            if(modalAgeGate){
+                modalAgeGate.classList.remove("hide");
+                modalAgeGate.classList.add("flex", "flex-middle");
+            }
+            return
+        }
+        document.getElementById('kc-totp-login-form').submit()
+    }
+
+    function socialLoginNameValidation() {
+        console.log("Attempting to validate names from IDP.")
+        var regEx = /^[\p{L}][_\-.\s'\p{L}\p{N}]*$/mu;
+        var maxLength = 64;
+        var isValid = true;
+        if (regEx.test(firstName.value) == false || firstName.value.length > maxLength) {
+            document.getElementById("firstNameErrorMsg").innerHTML = '<div class="form-group__help" role="alert"><span>Please enter your First name starting with an alphabet character and no special characters except hypen(-), underscore(_), and period(.)</span></div>'
+            isValid = false;
+        } else {
+            document.getElementById("firstNameErrorMsg").innerHTML = ''
+        }
+        if (regEx.test(lastName.value) == false || lastName.value.length > maxLength) {
+            document.getElementById("lastNameErrorMsg").innerHTML = '<div class="form-group__help" role="alert"><span>Please enter your Last name starting with an alphabet character and no special characters except hypen(-), underscore(_), and period(.)</span></div>'
+            isValid = false;
+        } else {
+            document.getElementById("lastNameErrorMsg").innerHTML = ''
+        }
+        return isValid;
+    }
+
+    function socialLoginSubmit() {
+            console.log("Attempting to validate names from IDP.")
+            var isValid = socialLoginNameValidation();
+            if(!isValid) {
+                return isValid;
+            }
+            document.getElementById('kc-totp-social-login-form').submit()
+        }
+
+    function dplUpdateInfo() {
+        var selectCountry = document.getElementById('selectCountry').value;
+        var selectState = document.getElementById('selectState').value;
+        var isValid = true
+        if (!selectCountry) {
+            document.getElementById("selectCountryErrorMsg").innerHTML = '<div class="form-group__help" role="alert"><span>Please select country or region</span></div>'
+            isValid = false;
+        }
+        if (!selectState) {
+            document.getElementById("selectStateErrorMsg").innerHTML = '<div class="form-group__help" role="alert"><span>Please select state</span></div>'
+            isValid = false;
+        }
+        if(!isValid){
+            return false
+        }
+        document.getElementById('kc-dpl-country-form').submit()
+    }
+
+    function updateAgeInfo() {
+        var selectYear = document.getElementById('yearOfBirth').value;
+        var selectMonth = document.getElementById('selectMonth').value;
+        var isValid = true
+        if (!selectYear) {
+            document.getElementById("selectYearErrorMsg").innerHTML = '<div class="form-group__help" role="alert"><span>Please select year</span></div>'
+            isValid = false;
+        }
+        if (!selectMonth) {
+            document.getElementById("selectMonthErrorMsg").innerHTML = '<div class="form-group__help" role="alert"><span>Please select month</span></div>'
+            isValid = false;
+        }
+        if(!isValid){
+            return false
+        }
+        document.getElementById('kc-update-age-form').submit()
+    }
+    
+    function removeErrMsg(id){
+        document.getElementById(id).innerHTML = '';
+    }
+    function removeWhiteSpace(){
+        const emailInput = document.getElementById("email");
+        emailInput.value = emailInput.value.trim();
+    }
+    function ageGateValidation(countryCode, year, month){
+        const query = `
+            query ageGateValidateAge($countryCode: String!, $year: String!, $month: String!){
+                ageGateValidateAge(countryCode: $countryCode, year: $year, month: $month)
+            }
+        `;
+        return fetch(ENV_GRAPHQL, {
+            "method": "POST",
+            "headers": { "content-type": "application/json", "OrgName": "skillsforall" },
+            "body": JSON.stringify({
+                operationName: 'ageGateValidateAge',
+                query,
+                variables: {countryCode, year, month }
+            })
+            }).then(res => res.json())
+    }
+    </script>
+    <script>
+        var selectBox = document.getElementById('yearOfBirth');
+        for (var i = new Date().getFullYear(); i >= new Date().getFullYear() - 100; i--) {
+            var option = document.createElement('option');
+            option.value = i;
+            option.innerHTML = i;
+            selectBox.appendChild(option);
+        }
+    </script>
+    <script>
+        let gtmScript = document.createElement("script");
+        gtmScript.setAttribute("src", "//www.googletagmanager.com/gtm.js?id="+GTM_ID);
+        document.head.appendChild(gtmScript);
+    </script>
+
+    <script>
+        var queryString = window.location.href
+        var urlParams = new URL(queryString);
+        var uiLocales = urlParams.searchParams.get('ui_locales')
+        if(uiLocales=="en-US" || uiLocales=="es-XL" || uiLocales=="fr-FR" || uiLocales=="pt-BR" || uiLocales=="ar-SA"){
+            document.cookie = "KEYCLOAK_LOCALE="+uiLocales.split("-")[0]+";path=/auth/realms/skillsforall/";
+        } 
+    </script>
+
+
+    <script>
+        var queryString = window.location.href
+        var urlParams = new URL(queryString);
+        var kcLocales = urlParams.searchParams.get('kc_locale')  
+        var uiLocales = urlParams.searchParams.get('ui_locales')
+        if(kcLocales=="ar" || uiLocales=="ar-SA"){
+            document.cookie = "RTL_ENABLED=true;path=/auth/realms/skillsforall/";
+        }
+        if(kcLocales=="en" || kcLocales=="fr" || kcLocales=="es" || kcLocales=="pt-BR" || uiLocales=="en-US" || uiLocales=="es-XL" || uiLocales=="fr-FR" || uiLocales=="pt-BR"){
+            document.cookie = "RTL_ENABLED=false;path=/auth/realms/skillsforall/";
+        } 
+    </script>
+    <script>
+        var cookieValue = document.cookie.split(';')?.find(cookie => {
+            cookie = cookie.trim()
+            return cookie.startsWith('RTL_ENABLED')
+        })?.split('=')?.[1]
+        console.log("RTL_ENABLED:", cookieValue);   
+        if (cookieValue == "true") {
+            document.getElementById('sfa-container').setAttribute('dir', 'rtl')
+        } else {
+            document.getElementById('sfa-container').setAttribute('dir', 'ltr')
+        }
+    </script>
+
+    <script>
+        if (window.history.length === 1) {
+            document.getElementById('goBackVisibility').classList.add("hide");
+        } else {
+            document.getElementById('goBackVisibility').classList.add("show");
+        }   
+    </script>
+
+
+    <script>
+ 
+        function populateCountries(countriesData) {
+            const countrySelectList = document.getElementById("selectCountry");
+            countrySelectList.innerHTML = '<option value="">Select country</option>';
+            
+            countriesData.filter(country => country.status === "ACTIVE").forEach(country => {
+                const option = document.createElement("option");
+                option.textContent = country.name;
+                option.value = country.iso2;
+                countrySelectList.appendChild(option);
+            });
+        }
+
+        function populateStates(countryIso2, countriesData) {
+            const stateSelectList = document.getElementById("selectState");
+            stateSelectList.innerHTML = '<option value="">Select state</option>';
+            
+            const selectedCountry = countriesData.find(country => country.iso2 === countryIso2);
+            
+            if (!selectedCountry || !selectedCountry.states) {
+                console.log("States not available")
+                return;
+            }
+            
+            selectedCountry.states.forEach(state => {
+                const option = document.createElement("option");
+                option.textContent = state.name;
+                option.value = state.iso2;
+                stateSelectList.appendChild(option);
+            });
+        }
+
+        function invokePopulateState() {
+            removeErrMsg('selectCountryErrorMsg');
+            const selectedCountryIso2 = this.value;
+            populateStates(selectedCountryIso2, data);
+        }
+
+        function invokePopulateStateSessionStorage() {
+            const selectedCountryIso2 = sessionStorage.getItem("selectedCountry");
+            populateStates(selectedCountryIso2, data);
+        }
+
+        let data;
+        function fetchCountriesData() {
+            data = countriesList;
+            populateCountries(data);
+            document.getElementById("selectCountry").addEventListener("change", invokePopulateState);
+        }
+
+        fetchCountriesData();
+
+
+    </script>
+
+    </body>
+    </html>
