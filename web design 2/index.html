@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module">
+        // Firebase Authentication setup
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyDlnSyvOV1tUFtldW6M7_0gLP7ATfuEBlw",
+          authDomain: "login-29574.firebaseapp.com",
+          projectId: "login-29574",
+          storageBucket: "login-29574.appspot.com",
+          messagingSenderId: "973056849752",
+          appId: "1:973056849752:web:fe151ca00e676a49fa972d"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Check user authentication state
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                // If no user is logged in, redirect to the login page
+                window.location.href = "login/index2.html";
+            }
+        });
+
+        // Handle Logout
+        function handleLogout() {
+            signOut(auth).then(() => {
+                // Redirect to login page after successful logout
+                window.location.href = "login/index2.html";
+            }).catch((error) => {
+                console.error("Error during logout:", error.message);
+            });
+        }
+
+        // Attach handleLogout function globally
+        window.handleLogout = handleLogout;
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li>
+                    <p>Log-out
+                        <a href="#" onclick="handleLogout()">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                        </a>
+                    </p>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home / Portfolio Section -->
+    <section class="portfolio-section">
+        <div class="portfolio-text">
+            <h1>PORT<br>FOLIO</h1>
+        </div>
+        <div class="portfolio-image">
+            <img src="1.png" alt="Portfolio Image">
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="about-section">
+        <h1>ABOUT ME</h1>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="2.jpg" alt="About Me Image">
+            </div>
+            <div class="about-text">
+                <p>Hello! My name is Daniela May Carwana, but you can call me Dada. I'm currently pursuing a Bachelor of Science in Information Technology at Davao del Norte State College. I currently live in Consolacion, Panabo City, but I was born in Cebu City.</p>
+                <p>In my free time, I love watching BL series and K-dramas, and I'm a huge fan of Enhypen. These hobbies bring joy and excitement to my life, providing a much-needed break from my studies.</p>
+                <p>My ultimate goal is to graduate and make my family proud, as they are my daily source of inspiration and motivation. I'm passionate about technology and eager to contribute to the ever-evolving IT field.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <h1>Projects</h1>
+        <div class="project-list">
+            <div class="project-item">
+                <a href="https://lynxguerba.github.io/Tesda-Final_Project/"><img src="3.png" alt="Cloning Website"></a>
+                <h2>Cloning Website</h2>
+            </div>
+            <div class="project-item">
+                <a href="https://drive.google.com/drive/folders/1LT0SU4jT1bi7LqBvsMYGjEH90rAqeCkL?usp=sharing"><img src="4.png" alt="Movie List System"></a>
+                <h2>Movie List System</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="contact-info">
+            <h1>CONTACT</h1>
+            <p>Daniela May A. Carwana</p>
+            <p>Email: carwanadaniela@gmail.com</p>
+            <p>Phone: 09696076619</p>
+        </div>
+        <div class="form-section">
+            <form action="submit_form.php" method="post">
+                <label for="name">Full Name</label><br>
+                <input type="text" id="name" name="name" required><br>
+                <label for="email">Email</label><br>
+                <input type="email" id="email" name="email" required><br>
+                <label for="message">Leave us a message</label><br>
+                <textarea id="message" name="message" rows="5" required></textarea><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <ul class="social-icons">
+            <a href="https://www.facebook.com/iluvv.danieghurl" class="fa fa-facebook"></a>
+            <a href="https://x.com/MayCarwana" class="fa fa-twitter"></a>
+            <a href="https://www.instagram.com/iluvv.danieghurl/" class="fa fa-instagram"></a>
+        </ul>
+    </footer>
+</body>
+</html>

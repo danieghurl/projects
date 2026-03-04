@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDlnSyvOV1tUFtldW6M7_0gLP7ATfuEBlw",
+      authDomain: "login-29574.firebaseapp.com",
+      projectId: "login-29574",
+      storageBucket: "login-29574.appspot.com",
+      messagingSenderId: "973056849752",
+      appId: "1:973056849752:web:fe151ca00e676a49fa972d"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    function loginWithGoogle() {
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          window.location.href = "../index.html";
+        })
+        .catch((error) => {
+          console.error("Error during login:", error.message);
+        });
+    }
+
+    window.loginWithGoogle = loginWithGoogle;
+  </script>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form>
+      <input type="text" id="username" name="username" placeholder="Username" required>
+      <input type="password" id="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+    <button class="google-login" onclick="loginWithGoogle()">Login with Google</button>
+    <p>Don't have an account? <a href="#">Sign up</a></p>
+  </div>
+</body>
+</html>
