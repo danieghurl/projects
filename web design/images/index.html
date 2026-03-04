@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home / Portfolio Section -->
+    <section class="portfolio-section">
+        <div class="portfolio-text">
+            <h1>PORT<br>FOLIO</h1>
+        </div>
+        <div class="portfolio-image">
+            <img src="1.png" alt="Portfolio Image">
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="about-section">
+        <h1>ABOUT ME</h1>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="2.jpg" alt="About Me Image">
+            </div>
+            <div class="about-text">
+                <p>Hello! My name is Daniela May Carwana, but you can call me Dada. I'm currently pursuing a Bachelor of Science in Information Technology at Davao del Norte State College. I currently live in Consolacion, Panabo City, but I was born in Cebu City.</p>
+
+                <p>In my free time, I love watching BL series and K-dramas, and I'm a huge fan of Enhypen. These hobbies bring joy and excitement to my life, providing a much-needed break from my studies.</p>
+
+                <p>My ultimate goal is to graduate and make my family proud, as they are my daily source of inspiration and motivation. I'm passionate about technology and eager to contribute to the ever-evolving IT field.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <h1>Projects</h1>
+        <div class="project-list">
+            <div class="project-item">
+                <img src="tesda-clone.png" alt="Cloning Website">
+                <h2>Cloning Website</h2>
+            </div>
+            <div class="project-item">
+                <img src="movie-list-system.png" alt="Movie List System">
+                <h2>Movie List System</h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="contact-info">
+            <h1>CONTACT</h1>
+            <p>Daniela May A. Carwana</p>
+            <p>Email: carwanadaniela@gmail.com</p>
+            <p>Phone: 09696076619</p>
+        </div>
+        <div class="form-section">
+            <form action="submit_form.php" method="post">
+                <label for="name">Full Name</label><br>
+                <input type="text" id="name" name="name" required><br>
+                <label for="email">Email</label><br>
+                <input type="email" id="email" name="email" required><br>
+                <label for="message">Leave us a message</label><br>
+                <textarea id="message" name="message" rows="5" required></textarea><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <ul class="social-icons">
+            <li><a href="#"><img src="instagram-icon.png" alt="Instagram"></a></li>
+            <li><a href="#"><img src="twitter-icon.png" alt="Twitter"></a></li>
+            <li><a href="#"><img src="facebook-icon.png" alt="Facebook"></a></li>
+        </ul>
+    </footer>
+</body>
+</html>
