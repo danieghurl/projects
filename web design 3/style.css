@@ -1,0 +1,163 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color: white;
+}
+
+/* Header Styles */
+header {
+    padding: 20px;
+    background-color: black;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-start; 
+}
+
+nav ul li {
+    margin-right: 30px; 
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* Portfolio Section */
+.portfolio-section {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    padding: 50px;
+}
+
+.portfolio-text h1 {
+    font-size: 80px;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.portfolio-image img {
+    width: 400px;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 20px; 
+}
+
+/* About Section */
+.about-section {
+    padding: 50px;
+    background-color: #1a1a1a;
+}
+
+.about-section h1 {
+    font-size: 60px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.about-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.about-image img {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.about-text {
+    max-width: 600px;
+}
+
+.about-text p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Projects Section */
+.projects-section {
+    padding: 50px;
+    background-color: #2b2b2b;
+}
+
+.projects-section h1 {
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.project-list {
+    display: flex;
+    justify-content: center; 
+    gap: 40px; 
+}
+
+.project-item {
+    text-align: center;
+}
+
+.project-item img {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Contact Section */
+.contact-section {
+    padding: 50px;
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact-info {
+    width: 40%;
+}
+
+.form-section {
+    width: 50%;
+}
+
+.form-section input, .form-section textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+}
+
+.form-section input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+/* Social Icons */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.social-icons a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    margin: 0 10px;
+}

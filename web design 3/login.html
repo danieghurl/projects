@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Include Google Sign-In JavaScript -->
+    <meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+<body>
+    <div class="login-section">
+        <h1>Login to Your Account</h1>
+        
+        <!-- Google Sign-In Button -->
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    </div>
+
+    <script>
+        function onSignIn(googleUser) {
+            // Get profile information
+            var profile = googleUser.getBasicProfile();
+            console.log("ID: " + profile.getId()); // Don't send to backend! Use an ID token instead.
+            console.log("Name: " + profile.getName());
+            console.log("Image URL: " + profile.getImageUrl());
+            console.log("Email: " + profile.getEmail());
+
+            // Redirect to the home page after successful login
+            window.location.href = "index.php";
+        }
+    </script>
+</body>
+</html>
