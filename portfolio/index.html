@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✨ Daniela May Carwana | Creative Designer & Developer</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+    /* Light mode (default) */
+    body.light {
+      background: linear-gradient(135deg, #FFF5F7 0%, #FFEFF2 100%);
+      color: #4A2032;
+    }
+    /* Dark mode */
+    body.dark {
+      background: linear-gradient(135deg, #1a0f14 0%, #2d1b24 100%);
+      color: #FDE8F0;
+    }
+    body.dark .bg-white\/80,
+    body.dark .bg-white\/70,
+    body.dark .bg-white\/90,
+    body.dark .bg-white {
+      background-color: rgba(30, 20, 28, 0.85) !important;
+      border-color: #4a2c3a !important;
+    }
+    body.dark .border-pink-100,
+    body.dark .border-pink-200 {
+      border-color: #4a2c3a !important;
+    }
+    body.dark .text-gray-600,
+    body.dark .text-gray-700 {
+      color: #e2cbd5 !important;
+    }
+    body.dark .text-rose-800 {
+      color: #f5a9c7 !important;
+    }
+    body.dark .text-pink-600,
+    body.dark .text-pink-500 {
+      color: #f5a9c7 !important;
+    }
+    body.dark .bg-pink-100,
+    body.dark .bg-pink-50\/40,
+    body.dark .bg-pink-50 {
+      background-color: #3a2430 !important;
+      color: #f5a9c7 !important;
+    }
+    body.dark .bg-rose-100 {
+      background-color: #3a2430 !important;
+    }
+    body.dark .bg-gradient-to-br {
+      background: #2d1b24 !important;
+    }
+    body.dark .shadow-sm,
+    body.dark .shadow-md,
+    body.dark .shadow-lg {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+    }
+    body.dark input,
+    body.dark textarea {
+      background-color: #2a1a22 !important;
+      border-color: #5a3a48 !important;
+      color: #FDE8F0 !important;
+    }
+    body.dark input::placeholder,
+    body.dark textarea::placeholder {
+      color: #a07a8a !important;
+    }
+    body.dark .btn-primary {
+      background: linear-gradient(105deg, #b84d72, #8a3e58);
+    }
+    body.dark .nav-link::after {
+      background: #f5a9c7;
+    }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .floating-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 5;
+      opacity: 0.25;
+    }
+    .card-hover {
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      cursor: pointer;
+    }
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 35px -12px rgba(196, 100, 138, 0.25);
+    }
+    .section-reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .section-active {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+    .nav-link {
+      position: relative;
+      font-weight: 500;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2.5px;
+      background: #C4648A;
+      transition: width 0.25s ease;
+      border-radius: 4px;
+    }
+    body.dark .nav-link::after {
+      background: #f5a9c7;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .cert-ribbon {
+      position: absolute;
+      top: 12px;
+      right: -8px;
+      padding: 4px 16px 4px 14px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: #C4648A;
+      color: white;
+      clip-path: polygon(0 0, 100% 0, 92% 50%, 100% 100%, 0 100%, 6% 50%);
+      z-index: 5;
+    }
+    .lightbox-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(20px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0.2s, opacity 0.3s ease;
+      cursor: pointer;
+    }
+    .lightbox-modal.active { visibility: visible; opacity: 1; }
+    .lightbox-img {
+      max-width: 88vw;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 32px;
+      box-shadow: 0 30px 50px -20px black;
+      border: 2px solid rgba(255,255,240,0.3);
+      cursor: default;
+    }
+    .lightbox-caption {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      padding: 8px 24px;
+      border-radius: 60px;
+      color: white;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .close-lightbox {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      width: 48px;
+      height: 48px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: 300;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .close-lightbox:hover { background: #C4648A; transform: scale(1.05); }
+    .gallery-nav {
+      position: absolute;
+      bottom: 30px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      z-index: 2001;
+    }
+    .gallery-btn {
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      border: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 60px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gallery-btn:hover { background: #C4648A; transform: scale(1.07); }
+    .btn-primary {
+      background: linear-gradient(105deg, #C4648A, #A55274);
+      box-shadow: 0 8px 18px rgba(196,100,138,0.3);
+      transition: all 0.2s;
+    }
+    .btn-primary:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 24px rgba(196,100,138,0.4);
+    }
+    /* Dark mode toggle button */
+    .dark-mode-toggle {
+      background: rgba(196,100,138,0.15);
+      backdrop-filter: blur(8px);
+      border-radius: 60px;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid rgba(196,100,138,0.3);
+    }
+    .dark-mode-toggle:hover {
+      background: rgba(196,100,138,0.3);
+      transform: scale(1.02);
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.2; }
+      100% { transform: translateY(-120vh) rotate(15deg); opacity: 0; }
+    }
+    .heart-float {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body class="light">
+  <!-- Floating hearts background -->
+  <div id="heartCanvas" class="fixed inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+  <!-- Lightbox Modal with gallery -->
+  <div id="lightboxModal" class="lightbox-modal">
+    <span class="close-lightbox" id="closeLightboxBtn">✕</span>
+    <img id="lightboxImage" class="lightbox-img" alt="Enlarged view">
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+    <div class="gallery-nav" id="galleryNav">
+      <button class="gallery-btn" id="prevBtn">‹</button>
+      <button class="gallery-btn" id="nextBtn">›</button>
+    </div>
+  </div>
+
+  <div class="relative z-10">
+    <!-- Sticky Navigation with Dark Mode Toggle -->
+    <nav class="sticky top-0 z-50 backdrop-blur-xl border-b transition-all duration-300" style="background: rgba(255, 245, 247, 0.85); border-color: #FAD1DF;" id="navBar">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <span class="font-display font-bold text-2xl tracking-tight" style="color: #9E4B6C;" id="nav-name">✨Daniee</span>
+        <div class="hidden md:flex gap-8 text-base font-medium items-center">
+          <a href="#about" class="nav-link" style="color:#9E4B6C;">About</a>
+          <a href="#projects" class="nav-link" style="color:#9E4B6C;">Projects</a>
+          <a href="#certificates" class="nav-link" style="color:#9E4B6C;">Certificates</a>
+          <a href="#contact" class="nav-link" style="color:#9E4B6C;">Contact</a>
+          <!-- Dark Mode Toggle Button -->
+          <div id="darkModeToggle" class="dark-mode-toggle">
+            <span id="toggleIcon">🌙</span>
+            <span id="toggleText" class="text-sm font-medium" style="color:#9E4B6C;">Dark</span>
+          </div>
+        </div>
+        <div class="md:hidden flex gap-3 items-center">
+          <a href="#about" class="text-sm font-medium text-[#9E4B6C]">About</a>
+          <a href="#projects" class="text-sm font-medium text-[#9E4B6C]">Work</a>
+          <a href="#contact" class="text-sm font-medium text-[#9E4B6C]">Contact</a>
+          <div id="darkModeToggleMobile" class="dark-mode-toggle" style="padding: 6px 12px;">
+            <span id="toggleIconMobile">🌙</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative max-w-6xl mx-auto px-6 pt-20 pb-16 text-center">
+      <div class="fade-in stagger-1">
+        <div class="w-32 h-32 mx-auto rounded-full shadow-xl overflow-hidden border-4 border-white cursor-pointer transition hover:scale-105" id="profilePicContainer">
+          <img id="profileImage" src="dada.jpg" alt="Daniela" class="w-full h-full object-cover">
+        </div>
+      </div>
+      <h1 id="hero-name" class="font-display text-5xl md:text-7xl font-bold mt-6 mb-3 bg-gradient-to-r from-pink-500 via-rose-400 to-purple-400 bg-clip-text text-transparent">Daniela May Carwana</h1>
+      <p id="hero-tagline" class="text-xl md:text-2xl font-light mb-8" style="color: #C4648A;">Web Developer &amp; Creative Designer ✨</p>
+      <div class="flex flex-wrap justify-center gap-5">
+        <a href="#projects" class="btn-primary px-8 py-3 rounded-full text-white font-semibold shadow-md transition">✨ View Magic</a>
+        <a href="#contact" class="px-8 py-3 rounded-full font-semibold border-2 border-rose-300 text-rose-600 hover:bg-rose-50 transition">💌 Get in Touch</a>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-12 px-6 bg-white/40 backdrop-blur-sm my-4 rounded-3xl max-w-5xl mx-auto transition-all">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div><div class="text-3xl font-bold text-pink-600">50+</div><div class="text-sm text-gray-600">Happy Clients</div></div>
+        <div><div class="text-3xl font-bold text-pink-600">100+</div><div class="text-sm text-gray-600">Projects</div></div>
+        <div><div class="text-3xl font-bold text-pink-600">5★</div><div class="text-sm text-gray-600">Avg Rating</div></div>
+        <div><div class="text-3xl font-bold text-pink-600">3+</div><div class="text-sm text-gray-600">Years Exp</div></div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-reveal max-w-6xl mx-auto px-6 py-16">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div class="rounded-2xl p-8 bg-white/70 backdrop-blur-sm shadow-sm border border-pink-100 transition-all">
+          <h2 class="font-display text-3xl font-bold text-rose-800 mb-4">🌸 About Me</h2>
+          <p id="about-text" class="text-gray-700 leading-relaxed">I'm Daniela, a designer & developer who pours heart into every pixel. I craft dreamy, functional digital experiences that tell your story. With Figma magic and clean code, I turn ideas into vibrant realities. Let's build something beautiful 💖</p>
+          <div class="flex gap-4 mt-6">
+            <div class="flex items-center gap-2"><div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center"><i data-lucide="sparkles" size="16" class="text-pink-500"></i></div><span class="text-sm">UI/UX</span></div>
+            <div class="flex items-center gap-2"><div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center"><i data-lucide="figma" size="16" class="text-pink-500"></i></div><span class="text-sm">Figma Expert</span></div>
+            <div class="flex items-center gap-2"><div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center"><i data-lucide="layout" size="16" class="text-pink-500"></i></div><span class="text-sm">Responsive</span></div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-gradient-to-br from-pink-100 to-rose-100 p-5 rounded-2xl text-center shadow-sm"><i data-lucide="palette" class="mx-auto text-pink-600 mb-2" size="28"></i><h3 class="font-bold">Creative Design</h3><p class="text-xs text-gray-600">Unique aesthetic</p></div>
+          <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-5 rounded-2xl text-center shadow-sm"><i data-lucide="zap" class="mx-auto text-pink-600 mb-2" size="28"></i><h3 class="font-bold">Fast Delivery</h3><p class="text-xs text-gray-600">Quality first</p></div>
+          <div class="bg-gradient-to-br from-blue-50 to-pink-50 p-5 rounded-2xl text-center shadow-sm"><i data-lucide="heart" class="mx-auto text-pink-600 mb-2" size="28"></i><h3 class="font-bold">Passionate</h3><p class="text-xs text-gray-600">Love details</p></div>
+          <div class="bg-gradient-to-br from-yellow-50 to-orange-50 p-5 rounded-2xl text-center shadow-sm"><i data-lucide="star" class="mx-auto text-pink-600 mb-2" size="28"></i><h3 class="font-bold">5-Star Support</h3><p class="text-xs text-gray-600">Always here</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section-reveal max-w-6xl mx-auto px-6 py-16">
+      <h2 class="font-display text-4xl font-bold text-center mb-12 bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">✨ My Lovely Projects ✨</h2>
+      <div class="grid md:grid-cols-2 gap-8" id="projects-grid">
+        <a href="https://danieghurl.github.io/projects/kpop/" target="_blank" class="group card-hover rounded-2xl overflow-hidden shadow-lg border border-pink-100 bg-white/80 transition">
+          <div class="h-52 overflow-hidden relative"><img src="3.png" alt="Kpop project" class="w-full h-full object-cover group-hover:scale-105 transition duration-500"></div>
+          <div class="p-6"><h3 class="font-display text-xl font-bold text-rose-800">Kpop Fan Community</h3><p class="text-sm text-gray-600 mt-1">A vibrant fan platform for Kpop stans to connect & share.</p><div class="flex gap-2 mt-3"><span class="text-xs px-3 py-1 rounded-full bg-pink-100 text-pink-700">HTML/CSS</span><span class="text-xs px-3 py-1 rounded-full bg-pink-100 text-pink-700">Responsive</span></div></div>
+        </a>
+        <a href="https://lynxguerba.github.io/Tesda-Final_Project/" target="_blank" class="group card-hover rounded-2xl overflow-hidden shadow-lg border border-pink-100 bg-white/80 transition">
+          <div class="h-52 overflow-hidden"><img src="4.png" alt="Tesda Clone" class="w-full h-full object-cover group-hover:scale-105 transition"></div>
+          <div class="p-6"><h3 class="font-display text-xl font-bold text-rose-800">TESDA Website Clone</h3><p class="text-sm text-gray-600 mt-1">Front-end practice replicating modern layout design.</p><div class="flex gap-2 mt-3"><span class="text-xs px-3 py-1 rounded-full bg-pink-100 text-pink-700">HTML/CSS</span><span class="text-xs px-3 py-1 rounded-full bg-pink-100 text-pink-700">Responsive</span></div></div>
+        </a>
+        <a href="https://danieghurl.github.io/projects/financetracker/" target="_blank" class="group card-hover rounded-2xl overflow-hidden shadow-lg border border-pink-100 bg-white/80 transition">
+          <div class="h-52 overflow-hidden"><img src="2.png" alt="Finance Tracker" class="w-full h-full object-cover group-hover:scale-105 transition"></div>
+          <div class="p-6"><h3 class="font-display text-xl font-bold text-rose-800">Finance Tracker UI</h3><p class="text-sm text-gray-600 mt-1">Sleek dashboard for personal expense tracking.</p><div class="flex gap-2 mt-3"><span class="text-xs px-3 py-1 rounded-full bg-pink-100 text-pink-700">HTML/CSS</span><span class="text-xs px-3 py-1 rounded-full bg-pink-100 text-pink-700">Responsive</span></div></div>
+        </a>
+        <a href="https://danieghurl.github.io/projects/justlove/" target="_blank" class="group card-hover rounded-2xl overflow-hidden shadow-lg border border-pink-100 bg-white/80 transition">
+          <div class="h-52 overflow-hidden"><img src="menu.png" alt="Digital Menu UI" class="w-full h-full object-cover group-hover:scale-105 transition"></div>
+          <div class="p-6"><h3 class="font-display text-xl font-bold text-rose-800">Digital Menu UI</h3><p class="text-sm text-gray-600 mt-1">Beautiful restaurant menu with categories, modals, and cart preview.</p><div class="flex gap-2 mt-3"><span class="text-xs px-3 py-1 rounded-full bg-pink-100 text-pink-700">HTML/CSS</span><span class="text-xs px-3 py-1 rounded-full bg-pink-100 text-pink-700">Responsive</span></div></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="section-reveal max-w-6xl mx-auto px-6 py-16 bg-white/30 rounded-3xl my-4 transition-all">
+      <h2 class="font-display text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-purple-500">📜 Certificates</h2>
+      <div class="grid md:grid-cols-3 gap-8" id="certs-grid">
+        <div class="relative card-hover rounded-2xl bg-white/90 border border-pink-200 shadow-md overflow-hidden">
+          <div class="cert-ribbon">2025</div>
+          <div class="cert-img-area p-6 flex justify-center cursor-pointer" data-cert-title="Cisco Certificates (Dual Award)" data-gallery='["cisco.jpg", "cisco2.jpg"]'>
+            <div class="w-36 h-36 rounded-2xl shadow-md overflow-hidden border-4 border-pink-200"><img src="cisco.jpg" class="w-full h-full object-cover" alt="Cisco Cert"></div>
+          </div>
+          <div class="p-5 text-center"><h3 class="font-bold text-xl text-rose-800">Cisco Certifications</h3><p class="text-sm text-gray-500">Networking & Cybersecurity</p><span class="inline-block mt-2 text-xs bg-pink-100 px-3 py-1 rounded-full">2 Certificates</span></div>
+        </div>
+        <div class="relative card-hover rounded-2xl bg-white/90 border border-pink-200 shadow-md overflow-hidden">
+          <div class="cert-ribbon">2025</div>
+          <div class="cert-img-area p-6 flex justify-center cursor-pointer" data-cert-title="BUGSAI Excellence Awards" data-gallery='["bugsai.jpg", "bugsai2.jpg"]'>
+            <div class="w-36 h-36 rounded-2xl shadow-md overflow-hidden border-4 border-pink-200"><img src="bugsai.jpg" class="w-full h-full object-cover" alt="BUGSAI"></div>
+          </div>
+          <div class="p-5 text-center"><h3 class="font-bold text-xl text-rose-800">BUGSAI Awards</h3><p class="text-sm text-gray-500">Leadership & Tech Innovation</p><span class="inline-block mt-2 text-xs bg-pink-100 px-3 py-1 rounded-full">2 Certificates</span></div>
+        </div>
+        <div class="relative card-hover rounded-2xl bg-white/90 border border-pink-200 shadow-md overflow-hidden">
+          <div class="cert-ribbon">2025</div>
+          <div class="cert-img-area p-6 flex justify-center cursor-pointer" data-cert-title="Completion Honors (2 Certs)" data-gallery='["1.jpg", "2.jpg"]'>
+            <div class="w-36 h-36 rounded-2xl shadow-md overflow-hidden border-4 border-pink-200"><img src="1.jpg" class="w-full h-full object-cover" alt="Completion"></div>
+          </div>
+          <div class="p-5 text-center"><h3 class="font-bold text-xl text-rose-800">Certificate of Completion</h3><p class="text-sm text-gray-500">Advance Seminar Series</p><span class="inline-block mt-2 text-xs bg-pink-100 px-3 py-1 rounded-full">2 Certificates</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-reveal max-w-3xl mx-auto px-6 py-16">
+      <div class="rounded-2xl bg-white/80 backdrop-blur-sm p-8 shadow-xl border border-pink-200 transition-all">
+        <h2 class="font-display text-3xl font-bold text-center text-rose-800 mb-6">💌 Let's Create Magic</h2>
+        <form id="contact-form" class="space-y-5">
+          <div><input type="text" id="c-name" placeholder="Your name" class="w-full px-5 py-3 rounded-xl border border-pink-200 bg-pink-50/40 focus:ring-2 focus:ring-pink-300 outline-none"></div>
+          <div><input type="email" id="c-email" placeholder="Email address" class="w-full px-5 py-3 rounded-xl border border-pink-200 bg-pink-50/40 focus:ring-2 focus:ring-pink-300 outline-none"></div>
+          <div><textarea id="c-msg" rows="4" placeholder="Tell me about your dream project ✨" class="w-full px-5 py-3 rounded-xl border border-pink-200 bg-pink-50/40 focus:ring-2 focus:ring-pink-300 outline-none"></textarea></div>
+          <button type="submit" class="w-full btn-primary py-3 rounded-xl text-white font-bold text-lg transition">Send with Love <i data-lucide="heart" class="inline-block ml-2" size="18"></i></button>
+          <p id="form-success" class="text-center text-sm font-medium text-pink-600 hidden">✨ Message sent! I'll reply soon ✨</p>
+        </form>
+       <div class="flex justify-center gap-6 mt-8 text-pink-500">
+  <a href="https://www.instagram.com/pretty.dannyyy/" target="_blank" rel="noopener noreferrer">
+    <i data-lucide="instagram" class="cursor-pointer hover:text-pink-700"></i>
+  </a>
+  <a href="https://x.com/MayCarwana" target="_blank" rel="noopener noreferrer">
+    <i data-lucide="twitter" class="cursor-pointer hover:text-pink-700"></i>
+  </a>
+  <a href="https://www.facebook.com/iluvv.danieghurl" target="_blank" rel="noopener noreferrer">
+    <i data-lucide="facebook" class="cursor-pointer hover:text-pink-700"></i>
+  </a>
+  <a href="mailto:carwanadaniela@gmail.com">
+    <i data-lucide="mail" class="cursor-pointer hover:text-pink-700"></i>
+  </a>
+</div>
+      </div>
+    </section>
+
+    <footer class="border-t border-pink-200 py-8 text-center transition-all" id="footer">© 2026 Daniela May Carwana — Crafted with 💖 and floating sparkles</footer>
+  </div>
+
+  <script>
+    lucide.createIcons();
+    
+    // Dark Mode Functionality
+    function initDarkMode() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.body.classList.remove('light');
+        document.body.classList.add('dark');
+        updateToggleUI('dark');
+      } else {
+        document.body.classList.remove('dark');
+        document.body.classList.add('light');
+        updateToggleUI('light');
+      }
+    }
+    
+    function updateToggleUI(theme) {
+      const toggleIcon = document.getElementById('toggleIcon');
+      const toggleIconMobile = document.getElementById('toggleIconMobile');
+      const toggleText = document.getElementById('toggleText');
+      if (theme === 'dark') {
+        if (toggleIcon) toggleIcon.textContent = '☀️';
+        if (toggleIconMobile) toggleIconMobile.textContent = '☀️';
+        if (toggleText) toggleText.textContent = 'Light';
+      } else {
+        if (toggleIcon) toggleIcon.textContent = '🌙';
+        if (toggleIconMobile) toggleIconMobile.textContent = '🌙';
+        if (toggleText) toggleText.textContent = 'Dark';
+      }
+    }
+    
+    function toggleDarkMode() {
+      if (document.body.classList.contains('light')) {
+        document.body.classList.remove('light');
+        document.body.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        updateToggleUI('dark');
+      } else {
+        document.body.classList.remove('dark');
+        document.body.classList.add('light');
+        localStorage.setItem('theme', 'light');
+        updateToggleUI('light');
+      }
+      // Refresh Lucide icons to ensure color updates
+      setTimeout(() => lucide.createIcons(), 50);
+    }
+    
+    // Attach toggle events
+    const toggleBtn = document.getElementById('darkModeToggle');
+    const toggleBtnMobile = document.getElementById('darkModeToggleMobile');
+    if (toggleBtn) toggleBtn.addEventListener('click', toggleDarkMode);
+    if (toggleBtnMobile) toggleBtnMobile.addEventListener('click', toggleDarkMode);
+    
+    initDarkMode();
+    
+    // Floating hearts
+    function createFloatingHearts() {
+      const container = document.getElementById('heartCanvas');
+      for (let i = 0; i < 24; i++) {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.classList.add('heart-float');
+        heart.style.position = 'absolute';
+        heart.style.fontSize = (Math.random() * 20 + 12) + 'px';
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animation = `floatUp ${Math.random() * 12 + 10}s linear infinite`;
+        heart.style.opacity = Math.random() * 0.3 + 0.1;
+        heart.style.animationDelay = Math.random() * 8 + 's';
+        heart.style.color = '#F9A8D4';
+        container.appendChild(heart);
+      }
+    }
+    createFloatingHearts();
+    
+    // Lightbox Logic
+    const modal = document.getElementById('lightboxModal');
+    const lightboxImg = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const closeBtn = document.getElementById('closeLightboxBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentGallery = [];
+    let currentIdx = 0;
+    let currentTitle = '';
+    
+    function openLightboxWithGallery(imagesArray, title, startIndex = 0) {
+      currentGallery = [...imagesArray];
+      currentIdx = startIndex;
+      currentTitle = title;
+      if(currentGallery.length > 0) updateLightboxImage();
+      const navDiv = document.getElementById('galleryNav');
+      navDiv.style.display = currentGallery.length > 1 ? 'flex' : 'none';
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function updateLightboxImage() {
+      if(currentGallery.length) {
+        lightboxImg.src = currentGallery[currentIdx];
+        lightboxCaption.textContent = `${currentTitle} (${currentIdx+1}/${currentGallery.length})`;
+      }
+    }
+    function nextImage() { if(currentGallery.length) { currentIdx = (currentIdx+1)%currentGallery.length; updateLightboxImage(); } }
+    function prevImage() { if(currentGallery.length) { currentIdx = (currentIdx-1+currentGallery.length)%currentGallery.length; updateLightboxImage(); } }
+    function closeLightbox() { modal.classList.remove('active'); document.body.style.overflow = ''; currentGallery = []; }
+    modal.addEventListener('click', (e) => { if(e.target === modal) closeLightbox(); });
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+    document.addEventListener('keydown', (e) => {
+      if(modal.classList.contains('active')) {
+        if(e.key === 'Escape') closeLightbox();
+        if(e.key === 'ArrowLeft') prevImage();
+        if(e.key === 'ArrowRight') nextImage();
+      }
+    });
+    
+    // Certificates Gallery
+    document.querySelectorAll('.cert-img-area').forEach(area => {
+      const title = area.getAttribute('data-cert-title') || 'Certificate';
+      const galleryAttr = area.getAttribute('data-gallery');
+      if(galleryAttr) {
+        try {
+          let galleryArr = JSON.parse(galleryAttr);
+          if(Array.isArray(galleryArr) && galleryArr.length) {
+            area.addEventListener('click', (e) => { e.stopPropagation(); openLightboxWithGallery(galleryArr, title, 0); });
+            return;
+          }
+        } catch(e) { console.warn("invalid gallery"); }
+      }
+      const imgSrc = area.querySelector('img')?.src;
+      if(imgSrc) area.addEventListener('click', () => openLightboxWithGallery([imgSrc], title, 0));
+    });
+    
+    // Project preview
+    document.querySelectorAll('.project-lightbox-trigger').forEach(proj => {
+      const title = proj.getAttribute('data-project-title') || 'Project';
+      const imgSrc = proj.getAttribute('data-img-src') || proj.querySelector('img')?.src;
+      proj.addEventListener('click', (e) => { if(imgSrc) openLightboxWithGallery([imgSrc], title, 0); });
+    });
+    
+    // Profile click
+    const profileImg = document.getElementById('profileImage');
+    const profileContainer = document.getElementById('profilePicContainer');
+    if(profileContainer) profileContainer.addEventListener('click', () => { if(profileImg) openLightboxWithGallery([profileImg.src], '✨ Daniela Profile', 0); });
+    
+    // Contact form
+    const contactForm = document.getElementById('contact-form');
+    if(contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const successMsg = document.getElementById('form-success');
+        successMsg.classList.remove('hidden');
+        contactForm.reset();
+        setTimeout(() => successMsg.classList.add('hidden'), 3000);
+      });
+    }
+    
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('section-active'); });
+    }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+    document.querySelectorAll('.section-reveal').forEach(el => observer.observe(el));
+    
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if(targetId && targetId !== '#') {
+          const target = document.querySelector(targetId);
+          if(target) target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
