@@ -3,11 +3,10 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>just LOVE &amp; café </title>
+  <title>just LOVE &amp; café | Menu</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <script src="/_sdk/element_sdk.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Outfit:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     html, body { height: 100%; margin: 0; scroll-behavior: smooth; }
     .font-heading { font-family: 'DM Serif Display', serif; }
@@ -24,19 +23,9 @@
     @keyframes fadeUp {
       to { opacity: 1; transform: translateY(0); }
     }
-    .cart-badge { animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
-    @keyframes popIn {
-      0% { transform: scale(0); }
-      100% { transform: scale(1); }
-    }
-    .toast-enter { animation: toastIn 0.4s ease forwards; }
-    .toast-exit { animation: toastOut 0.3s ease forwards; }
-    @keyframes toastIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
-    @keyframes toastOut { from { opacity:1; transform: translateY(0); } to { opacity:0; transform: translateY(20px); } }
     .nav-link { position: relative; }
     .nav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1px; background: currentColor; transition: width 0.3s ease; }
     .nav-link:hover::after { width:100%; }
-    .quick-view-overlay { backdrop-filter: blur(4px); }
     .category-tab-active {
       background: #2C2420;
       color: #F6F1EB;
@@ -44,54 +33,72 @@
     }
     .category-tab-inactive {
       background: rgba(44,36,32,0.05);
-      color: #2C2420/60;
+      color: #2C2420;
       backdrop-filter: blur(2px);
     }
     .category-tab-inactive:hover {
       background: rgba(44,36,32,0.12);
     }
+    /* Improved image sizing - consistent aspect ratio with proper fit */
+    .product-image-container {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      position: relative;
+    }
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.6s cubic-bezier(0.22, 0.95, 0.36, 1);
+    }
+    /* Larger text styles */
+    .product-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      line-height: 1.3;
+    }
+    .product-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #2C2420;
+    }
+    .product-weight {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: rgba(44,36,32,0.4);
+    }
+    .product-tasting {
+      font-size: 0.75rem;
+      color: rgba(44,36,32,0.5);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      .product-name { font-size: 1.25rem; }
+      .product-price { font-size: 1.2rem; }
+    }
   </style>
   <style>body { box-sizing: border-box; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
  <body class="h-full font-body bg-[#F6F1EB] text-[#2C2420] overflow-auto">
-  
-  <!-- Toast Container -->
-  <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2"></div>
-  
-  <!-- Quick View Modal -->
-  <div id="quick-view" class="fixed inset-0 z-40 hidden">
-   <div class="quick-view-overlay absolute inset-0 bg-black/30" onclick="closeQuickView()"></div>
-   <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#F6F1EB] rounded-2xl shadow-2xl max-w-lg w-[92%] p-8 relative">
-    <button onclick="closeQuickView()" class="absolute top-4 right-4 text-[#2C2420]/50 hover:text-[#2C2420] transition"><i data-lucide="x" style="width:20px;height:20px;"></i></button>
-    <div id="qv-content"></div>
-   </div>
-  </div>
-  
-  <!-- Cart Drawer -->
-  <div id="cart-overlay" class="fixed inset-0 z-30 hidden">
-   <div class="absolute inset-0 bg-black/20 quick-view-overlay" onclick="toggleCart()"></div>
-   <div id="cart-drawer" class="absolute top-0 right-0 h-full w-full max-w-md bg-[#F6F1EB] shadow-2xl transform translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col">
-    <div class="flex items-center justify-between p-6 border-b border-[#2C2420]/10">
-     <h2 class="font-heading text-xl">Your Cart</h2><button onclick="toggleCart()" class="text-[#2C2420]/50 hover:text-[#2C2420] transition"><i data-lucide="x" style="width:20px;height:20px;"></i></button>
-    </div>
-    <div id="cart-items" class="flex-1 overflow-auto p-6"></div>
-    <div id="cart-footer" class="p-6 border-t border-[#2C2420]/10"></div>
-   </div>
-  </div>
   
   <div class="w-full min-h-full flex flex-col">
    <!-- Nav -->
    <header class="w-full px-6 md:px-12 py-5 flex items-center justify-between fade-up">
-    <nav class="hidden md:flex gap-6 text-sm font-light tracking-wide"><a href="#shop" class="nav-link" onclick="scrollToShop(event)">Shop</a> <a href="#about" class="nav-link">About</a> <a href="#" class="nav-link">Journal</a>
+    <nav class="hidden md:flex gap-6 text-sm font-light tracking-wide"><a href="#shop" class="nav-link" onclick="scrollToShop(event)">Menu</a> <a href="#about" class="nav-link">About</a> <a href="#" class="nav-link">Journal</a>
     </nav>
-    <!-- <div class="font-heading text-2xl tracking-tight" id="nav-brand">just LOVE &amp; café </div> -->
-    <div class="flex items-center gap-5"><button class="hover:opacity-60 transition"><i data-lucide="search" style="width:18px;height:18px;"></i></button> <button onclick="toggleCart()" class="relative hover:opacity-60 transition"> <i data-lucide="shopping-bag" style="width:18px;height:18px;"></i> <span id="cart-count" class="hidden absolute -top-2 -right-2 w-4 h-4 rounded-full bg-[#8B5E3C] text-[#F6F1EB] text-[10px] flex items-center justify-center font-medium cart-badge">0</span> </button>
-    </div>
+    <div class="font-heading text-2xl tracking-tight" id="nav-brand">WELCOME</div> 
+    <div class="flex items-center gap-5"><button class="hover:opacity-60 transition"><i data-lucide="search" style="width:18px;height:18px;"></i></button></div>
    </header>
    
    <!-- Hero Section with Background Image -->
-   <section class="relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden rounded-b-[2rem] md:rounded-b-[3rem]">
+   <section class="relative w-full min-h-[75vh] flex items-center justify-center overflow-hidden rounded-b-[2rem] md:rounded-b-[3rem]">
      <div class="absolute inset-0 w-full h-full" style="background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600&h=900&fit=crop'); background-size: cover; background-position: 45% 35%;">
        <div class="absolute inset-0 bg-gradient-to-br from-[#F6F1EB]/70 via-[#F6F1EB]/40 to-transparent"></div>
      </div>
@@ -99,14 +106,14 @@
        <p class="text-xs tracking-[0.3em] uppercase font-light mb-4 fade-up fade-up-d1 text-[#8B5E3C] bg-white/30 backdrop-blur-sm inline-block px-4 py-1 rounded-full">ROSELYN ADAJAR</p>
        <h1 id="hero-title" class="font-heading text-5xl md:text-7xl lg:text-8xl leading-[0.95] mb-6 fade-up fade-up-d2 max-w-3xl drop-shadow-sm">Just Love <br>Café</h1>
        <p id="hero-sub" class="text-base md:text-lg font-light max-w-md mb-10 fade-up fade-up-d3 text-[#2C2420]/80 bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full">Brewed with Love, Served with Heart 
-We’re not fully open yet… but our cups are ready for you! 
+We're not fully open yet… but our cups are ready for you! 
 From our humble beginnings to your daily cravings,
 every cup is made with love and passion♥️</p>
        <a href="#shop" onclick="scrollToShop(event)" class="fade-up fade-up-d4 inline-flex items-center gap-2 bg-[#2C2420] text-[#F6F1EB] px-8 py-3.5 rounded-full text-sm font-medium tracking-wide hover:bg-[#8B5E3C] transition-colors duration-300 shadow-lg"> Explore Menu <i data-lucide="arrow-right" style="width:16px;height:16px;"></i> </a>
      </div>
    </section>
    
-   <!-- PRODUCT SECTION WITH CATEGORIES: COFFEE-BASED / NON-COFFEE / FOOD -->
+   <!-- PRODUCT SECTION WITH CATEGORIES: COFFEE-BASED / NON-COFFEE / FOOD (VIEW ONLY) -->
    <section id="shop" class="w-full px-6 md:px-12 py-12 md:py-20">
     <div class="flex flex-col gap-4 items-start justify-between mb-10 fade-up fade-up-d4">
      <div>
@@ -121,8 +128,8 @@ every cup is made with love and passion♥️</p>
      </div>
     </div>
     
-    <!-- Dynamic Grid for Products -->
-    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"></div>
+    <!-- Dynamic Grid for Products (view-only, no add-to-cart) -->
+    <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"></div>
    </section>
    
    <!-- About Section with Rich Visuals -->
@@ -155,24 +162,23 @@ every cup is made with love and passion♥️</p>
   </div>
   
   <script>
-// ========== EXPANDED PRODUCTS: COFFEE-BASED + NON-COFFEE + FOOD MENU (PHP PESOS) ==========
+// ========== PRODUCTS: COFFEE-BASED + NON-COFFEE + FOOD MENU (PHP PESOS) - UNCHANGED ==========
 const coffeeProducts = [
-  { id: 101, name: "Oreo Latte", origin: "N/A (Coffee + Oreo)", price: 35, weight: "250g", tasting: "Sweet, Creamy, Cookie-like", roast: "Medium/Dark", tag: "Bestseller", category: "coffee", img: "oreolatte.jpg", typeLabel: "Flavored Latte" },
-  { id: 102, name: "Spanish Latte", origin: "Spain/SE Asia", price: 40, weight: "250g", tasting: "Sweet (Condensed Milk), Smooth", roast: "Medium/Dark", tag: "", category: "coffee", img: "spanish latte.jpg", typeLabel: "Latte (Condensed Milk)" },
+  { id: 101, name: "Oreo Latte", origin: "Coffee + Oreo)", price: 35, weight: "250g", tasting: "Sweet, Creamy, Cookie-like", roast: "Medium/Dark", tag: "Bestseller", category: "coffee", img: "oreolatte.jpg", typeLabel: "Flavored Latte" },
+  { id: 102, name: "Spanish Latte", origin: "Spain", price: 40, weight: "250g", tasting: "Sweet (Condensed Milk), Smooth", roast: "Medium/Dark", tag: "", category: "coffee", img: "spanish latte.jpg", typeLabel: "Latte (Condensed Milk)" },
   { id: 103, name: "Mocha Latte", origin: "Guatemala", price: 50, weight: "250g", tasting: "Chocolatey, Rich, Sweet", roast: "Medium/Dark", tag: "New", category: "coffee", img: "mocha latte.jpg", typeLabel: "Chocolate Coffee" },
 ];
 
 const nonCoffeeProducts = [
-  { id: 201, name: "Mocha Oreo", origin: "N/A", price: 30, weight: "50g", tasting: "Very Sweet, Cookies & Cream, Chocolate", roast: "", tag: "Organic", category: "noncoffee", img: "Mocha Oreo.jpg", typeLabel: "Flavored Mocha" },
+  { id: 201, name: "Mocha Oreo", origin: "N/A", price: 30, weight: "50g", tasting: "Very Sweet, Cookies & Cream, Chocolate", roast: "", tag: "", category: "noncoffee", img: "Mocha Oreo.jpg", typeLabel: "Flavored Mocha" },
   { id: 202, name: "Oreo Matcha", origin: "Japan (Matcha)", price: 45, weight: "120g", tasting: "Earthy, Sweet (Oreo), Creamy", roast: "", tag: "", category: "noncoffee", img: "Oreo Matcha.jpg", typeLabel: "Matcha Blend" },
-  { id: 203, name: "Oreo Milk", origin: "N/A", price: 45, weight: "200g", tasting: "Very Sweet, Cookies & Cream", roast: "", tag: "Superfood", category: "noncoffee", img: "Oreo Milk.jpg", typeLabel: "Milk Beverage" },
+  { id: 203, name: "Oreo Milk", origin: "N/A", price: 45, weight: "200g", tasting: "Very Sweet, Cookies & Cream", roast: "", tag: "", category: "noncoffee", img: "Oreo Milk.jpg", typeLabel: "Milk Beverage" },
   { id: 204, name: "Dark Chocolate Latte", origin: "Mesoamerica", price: 50, weight: "40g", tasting: "Bittersweet, Intense Chocolate", roast: "Medium/Dark", category: "noncoffee", img: "Dark Chocolate Latte.jpg", typeLabel: "Chocolate Coffee" },
   { id: 205, name: "Matcha Latte", origin: "Japan", price: 35, weight: "80g", tasting: "Earthy, Vegetal, Creamy, Sweet", roast: "", tag: "", category: "noncoffee", img: "Matcha Latte.jpg", typeLabel: "Matcha Milk" },
-  { id: 206, name: "Mango Smoothie-Fresh Mango", origin: "Tropical (Mango)", price: 45, weight: "50g", tasting: "Sweet, Tangy, Fruity", roast: "", tag: "Vibrant", category: "noncoffee", img: "Mango Smoothie.jpg", typeLabel: "Fruit Smoothie" },
+  { id: 206, name: "Mango Smoothie-Fresh Mango", origin: "Tropical (Mango)", price: 45, weight: "50g", tasting: "Sweet, Tangy, Fruity", roast: "", tag: "", category: "noncoffee", img: "Mango Smoothie.jpg", typeLabel: "Fruit Smoothie" },
   { id: 207, name: "Fresh Strawberry Latte", origin: "Tropical (Strawberry)", price: 45, weight: "50g", tasting: "Natural sweet, slightly tart, creamy", roast: "", tag: "", category: "noncoffee", img: "strawberry.jpg", typeLabel: "Fruit Milk" }
 ];
 
-// NEW FOOD MENU (PESOS)
 const foodProducts = [
   { id: 301, name: "Cassava", origin: "Filipino", price: 55, weight: "1 order", tasting: "Creamy, buttery, slightly sweet with cheese topping", tag: "Best Seller", category: "food", img: "cassava.jpg", typeLabel: "Filipino Delight" },
   { id: 307, name: "Mango Float", origin: "Filipino", price: 65, weight: "1 order", tasting: "Creamy layers of graham, ripe mango, and whipped cream", tag: "Best Seller", category: "food", img: "float.jpg", typeLabel: "Filipino Dessert" },
@@ -182,10 +188,8 @@ const foodProducts = [
   { id: 311, name: "Filipino Spaghetti", origin: "Italian-Filipino", price: 85, weight: "1 order", tasting: "Sweet-savory tomato sauce with hotdog, ham, and cheese", tag: "Filipino Favorite", category: "food", img: "spaghetti.jpg", typeLabel: "Pasta" }
 ];
 
-let activeCategory = "coffee"; // 'coffee', 'noncoffee', or 'food'
-let cart = [];
+let activeCategory = "coffee";
 
-// Helper to get products based on active category
 function getActiveProducts() {
   if (activeCategory === "coffee") return coffeeProducts;
   if (activeCategory === "noncoffee") return nonCoffeeProducts;
@@ -194,13 +198,11 @@ function getActiveProducts() {
 
 function setActiveCategory(cat) {
   activeCategory = cat;
-  // update tab styles
   const coffeeTab = document.getElementById('tab-coffee');
   const nonCoffeeTab = document.getElementById('tab-noncoffee');
   const foodTab = document.getElementById('tab-food');
   
   if (coffeeTab && nonCoffeeTab && foodTab) {
-    // reset all to inactive first
     coffeeTab.classList.remove('category-tab-active');
     coffeeTab.classList.add('category-tab-inactive');
     nonCoffeeTab.classList.remove('category-tab-active');
@@ -227,6 +229,7 @@ function scrollToShop(e) {
   document.getElementById('shop').scrollIntoView({behavior:'smooth'}); 
 }
 
+// VIEW-ONLY RENDER: with properly sized images and larger fonts
 function renderProducts() {
   const grid = document.getElementById('product-grid');
   if (!grid) return;
@@ -236,215 +239,29 @@ function renderProducts() {
     let originText = "";
     if (activeCategory === "coffee") originText = p.origin;
     else if (activeCategory === "noncoffee") originText = p.typeLabel;
-    else originText = p.typeLabel; // food category display type
+    else originText = p.typeLabel;
     
-    const tagHtml = p.tag ? `<span class="absolute top-3 left-3 bg-[#8B5E3C] text-[#F6F1EB] text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-full shadow-md z-10">${p.tag}</span>` : '';
+    const tagHtml = p.tag ? `<span class="absolute top-3 left-3 bg-[#8B5E3C] text-[#F6F1EB] text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-full shadow-md z-10 font-medium">${p.tag}</span>` : '';
     return `
       <div class="product-card group fade-up" style="animation-delay:${(idx % 4) * 0.08}s">
-        <div class="relative bg-gradient-to-br from-amber-50/30 to-[#2C2420]/[0.02] rounded-2xl aspect-[3/4] mb-4 overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-shadow duration-500" onclick="openQuickView(${p.id})">
-          <img src="${p.img}" alt="${p.name}" class="product-img w-full h-full object-cover object-center absolute inset-0 opacity-95 group-hover:opacity-100 transition-all duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent"></div>
+        <div class="product-image-container relative bg-gradient-to-br from-amber-50/30 to-[#2C2420]/[0.02] rounded-2xl mb-4 overflow-hidden shadow-sm transition-shadow duration-300">
+          <img src="${p.img}" alt="${p.name}" class="product-img w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent pointer-events-none"></div>
           ${tagHtml}
-          <button onclick="event.stopPropagation();addToCart(${p.id})" class="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-[#2C2420] text-[#F6F1EB] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#8B5E3C] translate-y-2 group-hover:translate-y-0 z-10 shadow-md">
-            <i data-lucide="plus" style="width:14px;height:14px;"></i>
-          </button>
-          <div class="absolute bottom-3 left-3 bg-white/70 backdrop-blur-sm rounded-full px-2 py-0.5 text-[10px] font-medium text-[#2C2420]/70">${originText}</div>
+          <div class="absolute bottom-3 left-3 bg-white/80 backdrop-blur-sm rounded-full px-2.5 py-1 text-[11px] font-semibold text-[#2C2420]/80 shadow-sm">${originText}</div>
         </div>
-        <h3 class="font-heading text-base mb-1">${p.name}</h3>
-        <p class="text-xs text-[#2C2420]/50 font-light mb-2 line-clamp-1">${p.tasting || (activeCategory==='food' ? 'Made fresh daily' : (p.category==='noncoffee' ? 'Organic & pure' : 'Freshly roasted'))}</p>
-        <p class="text-sm font-medium">₱${p.price.toFixed(2)} <span class="text-[#2C2420]/30 font-light text-xs">/ ${p.weight}</span></p>
+        <div class="px-1">
+          <h3 class="product-name font-heading text-lg md:text-xl font-semibold mb-1 leading-tight">${p.name}</h3>
+          <p class="product-tasting text-xs md:text-sm text-[#2C2420]/60 mb-2 line-clamp-2">${p.tasting || (activeCategory==='food' ? 'Made fresh daily' : (p.category==='noncoffee' ? 'Organic & pure' : 'Freshly roasted'))}</p>
+          <div class="flex items-baseline justify-between flex-wrap gap-1 mt-1">
+            <span class="product-price text-base md:text-lg font-bold text-[#2C2420]">₱${p.price.toFixed(2)}</span>
+            <span class="product-weight text-[11px] md:text-xs text-[#2C2420]/40 font-light">/ ${p.weight}</span>
+          </div>
+        </div>
       </div>
     `;
   }).join('');
   lucide.createIcons();
-}
-
-function openQuickView(id) {
-  // search in all three collections
-  let product = [...coffeeProducts, ...nonCoffeeProducts, ...foodProducts].find(p => p.id === id);
-  if (!product) return;
-  const el = document.getElementById('quick-view');
-  if (!el) return;
-  
-  let categoryLabel = "";
-  if (product.category === "coffee") categoryLabel = product.origin + " · Coffee";
-  else if (product.category === "noncoffee") categoryLabel = product.typeLabel + " · Non-Coffee";
-  else categoryLabel = "Food · " + product.typeLabel;
-  
-  document.getElementById('qv-content').innerHTML = `
-    <div class="text-center mb-5">
-      <div class="w-32 h-32 rounded-full mx-auto mb-4 overflow-hidden shadow-md">
-        <img src="${product.img}" alt="${product.name}" class="w-full h-full object-cover">
-      </div>
-      <p class="text-xs tracking-[0.3em] uppercase font-light text-[#8B5E3C] mb-2">${categoryLabel}</p>
-      <h3 class="font-heading text-2xl mb-2">${product.name}</h3>
-      <p class="text-sm text-[#2C2420]/60 font-light max-w-xs mx-auto">${product.tasting || (product.category === 'food' ? 'Homestyle goodness' : 'Thoughtfully sourced for pure enjoyment')}</p>
-    </div>
-    <div class="grid grid-cols-3 gap-4 text-center mb-6">
-      <div class="bg-[#2C2420]/5 rounded-xl py-3"><p class="text-xs text-[#2C2420]/40 mb-1">Serving</p><p class="text-sm font-medium">${product.weight}</p></div>
-      <div class="bg-[#2C2420]/5 rounded-xl py-3"><p class="text-xs text-[#2C2420]/40 mb-1">Type</p><p class="text-sm font-medium">${product.category === 'coffee' ? (product.roast || 'Specialty') : (product.typeLabel || 'Delight')}</p></div>
-      <div class="bg-[#2C2420]/5 rounded-xl py-3"><p class="text-xs text-[#2C2420]/40 mb-1">Price</p><p class="text-sm font-medium">₱${product.price.toFixed(2)}</p></div>
-    </div>
-    <button onclick="addToCart(${product.id});closeQuickView()" class="w-full bg-[#2C2420] text-[#F6F1EB] py-3.5 rounded-full text-sm font-medium tracking-wide hover:bg-[#8B5E3C] transition-colors duration-300 flex items-center justify-center gap-2">
-      Add to Cart <i data-lucide="shopping-bag" style="width:14px;height:14px;"></i>
-    </button>
-  `;
-  el.classList.remove('hidden');
-  lucide.createIcons();
-}
-
-function closeQuickView() { 
-  const el = document.getElementById('quick-view');
-  if(el) el.classList.add('hidden');
-}
-
-function addToCart(id) {
-  const allProducts = [...coffeeProducts, ...nonCoffeeProducts, ...foodProducts];
-  const product = allProducts.find(p => p.id === id);
-  if (!product) return;
-  const existing = cart.find(c => c.id === id);
-  if (existing) existing.qty++;
-  else cart.push({ id, qty: 1, name: product.name, price: product.price, img: product.img });
-  updateCartUI();
-  showToast(`${product.name} added to bag`);
-}
-
-function updateCartUI() {
-  const countEl = document.getElementById('cart-count');
-  const total = cart.reduce((s,c)=>s+c.qty,0);
-  if(total>0) { countEl.textContent=total; countEl.classList.remove('hidden'); countEl.classList.add('flex'); }
-  else { countEl.classList.add('hidden'); countEl.classList.remove('flex'); }
-  renderCartDrawer();
-}
-
-function renderCartDrawer() {
-  const items = document.getElementById('cart-items');
-  const footer = document.getElementById('cart-footer');
-  if(!items || !footer) return;
-  if(cart.length===0) {
-    items.innerHTML = `<div class="flex flex-col items-center justify-center h-full text-center"><i data-lucide="coffee" style="width:40px;height:40px;" class="text-[#2C2420]/20 mb-3"></i><p class="text-sm text-[#2C2420]/40 font-light">Your cart is empty</p></div>`;
-    footer.innerHTML = '';
-    lucide.createIcons();
-    return;
-  }
-  let subtotal = 0;
-  items.innerHTML = cart.map(c => {
-    subtotal += c.price * c.qty;
-    return `<div class="flex items-center gap-4 py-4 border-b border-[#2C2420]/5">
-      <div class="w-14 h-14 bg-[#2C2420]/5 rounded-xl overflow-hidden flex-shrink-0">
-        <img src="${c.img}" class="w-full h-full object-cover" alt="${c.name}">
-      </div>
-      <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium truncate">${c.name}</p>
-        <p class="text-xs text-[#2C2420]/50 font-light">₱${c.price.toFixed(2)} × ${c.qty}</p>
-      </div>
-      <div class="flex items-center gap-2">
-        <button onclick="changeQty(${c.id},-1)" class="w-7 h-7 rounded-full bg-[#2C2420]/5 flex items-center justify-center hover:bg-[#2C2420]/15 transition text-xs">−</button>
-        <span class="text-sm w-4 text-center">${c.qty}</span>
-        <button onclick="changeQty(${c.id},1)" class="w-7 h-7 rounded-full bg-[#2C2420]/5 flex items-center justify-center hover:bg-[#2C2420]/15 transition text-xs">+</button>
-      </div>
-    </div>`;
-  }).join('');
-  footer.innerHTML = `
-    <div class="flex justify-between mb-4"><span class="text-sm font-light">Subtotal</span><span class="font-medium text-lg">₱${subtotal.toFixed(2)}</span></div>
-    <button class="w-full bg-[#2C2420] text-[#F6F1EB] py-3.5 rounded-full text-sm font-medium tracking-wide hover:bg-[#8B5E3C] transition-colors duration-300 shadow-md">Checkout →</button>
-    <p class="text-[10px] text-center text-[#2C2420]/30 mt-3 font-light">Free delivery on orders over ₱500</p>
-  `;
-  lucide.createIcons();
-}
-
-function changeQty(id, delta) {
-  const item = cart.find(c=>c.id===id);
-  if(!item) return;
-  item.qty += delta;
-  if(item.qty <= 0) cart = cart.filter(c=>c.id!==id);
-  updateCartUI();
-}
-
-function toggleCart() {
-  const overlay = document.getElementById('cart-overlay');
-  const drawer = document.getElementById('cart-drawer');
-  if(!overlay || !drawer) return;
-  if(overlay.classList.contains('hidden')) {
-    overlay.classList.remove('hidden');
-    requestAnimationFrame(()=> drawer.style.transform = 'translateX(0)');
-  } else {
-    drawer.style.transform = 'translateX(100%)';
-    setTimeout(()=> overlay.classList.add('hidden'), 500);
-  }
-}
-
-function showToast(msg) {
-  const container = document.getElementById('toast-container');
-  if(!container) return;
-  const toast = document.createElement('div');
-  toast.className = 'toast-enter bg-[#2C2420] text-[#F6F1EB] px-5 py-3 rounded-full text-sm font-light flex items-center gap-2 shadow-lg';
-  toast.innerHTML = `<i data-lucide="check" style="width:14px;height:14px;"></i> ${msg}`;
-  container.appendChild(toast);
-  lucide.createIcons();
-  setTimeout(()=>{ toast.classList.remove('toast-enter'); toast.classList.add('toast-exit'); setTimeout(()=>toast.remove(),300); }, 2000);
-}
-
-// ========== ELEMENT SDK CONFIG (preserved) ==========
-const defaultConfig = {
-  brand_name: "just LOVE café",
-  hero_headline: "Coffee &\nBeyond",
-  hero_subtext: "From rich espresso to soothing matcha — curated for every ritual.",
-  background_color: "#F6F1EB",
-  surface_color: "#2C2420",
-  text_color: "#2C2420",
-  primary_action_color: "#2C2420",
-  secondary_action_color: "#8B5E3C",
-  font_family: "DM Serif Display",
-  font_size: 16
-};
-
-function applyConfig(config) {
-  const bg = config.background_color || defaultConfig.background_color;
-  const text = config.text_color || defaultConfig.text_color;
-  const font = config.font_family || defaultConfig.font_family;
-  const size = config.font_size || defaultConfig.font_size;
-  document.body.style.backgroundColor = bg;
-  document.body.style.color = text;
-  document.body.style.fontSize = size + 'px';
-  const brand = config.brand_name || defaultConfig.brand_name;
-  const brandEl = document.getElementById('nav-brand');
-  const footerBrand = document.getElementById('footer-brand');
-  if(brandEl) brandEl.textContent = brand;
-  if(footerBrand) footerBrand.textContent = brand;
-  const headline = config.hero_headline || defaultConfig.hero_headline;
-  const heroTitle = document.getElementById('hero-title');
-  if(heroTitle) {
-    heroTitle.innerHTML = headline.replace(/\n/g,'<br>');
-    heroTitle.style.fontFamily = `${font}, serif`;
-  }
-  const heroSub = document.getElementById('hero-sub');
-  if(heroSub) heroSub.textContent = config.hero_subtext || defaultConfig.hero_subtext;
-  document.querySelectorAll('.font-heading').forEach(el => el.style.fontFamily = `${font}, serif`);
-}
-
-if (window.elementSdk) {
-  window.elementSdk.init({
-    defaultConfig,
-    onConfigChange: async (config) => applyConfig(config),
-    mapToCapabilities: (config) => ({
-      recolorables: [
-        { get:()=>config.background_color||defaultConfig.background_color, set:(v)=>{config.background_color=v;window.elementSdk.setConfig({background_color:v})} },
-        { get:()=>config.surface_color||defaultConfig.surface_color, set:(v)=>{config.surface_color=v;window.elementSdk.setConfig({surface_color:v})} },
-        { get:()=>config.text_color||defaultConfig.text_color, set:(v)=>{config.text_color=v;window.elementSdk.setConfig({text_color:v})} },
-        { get:()=>config.primary_action_color||defaultConfig.primary_action_color, set:(v)=>{config.primary_action_color=v;window.elementSdk.setConfig({primary_action_color:v})} },
-        { get:()=>config.secondary_action_color||defaultConfig.secondary_action_color, set:(v)=>{config.secondary_action_color=v;window.elementSdk.setConfig({secondary_action_color:v})} },
-      ],
-      borderables: [],
-      fontEditable: { get:()=>config.font_family||defaultConfig.font_family, set:(v)=>{config.font_family=v;window.elementSdk.setConfig({font_family:v})} },
-      fontSizeable: { get:()=>config.font_size||defaultConfig.font_size, set:(v)=>{config.font_size=v;window.elementSdk.setConfig({font_size:v})} }
-    }),
-    mapToEditPanelValues: (config) => new Map([
-      ["brand_name", config.brand_name || defaultConfig.brand_name],
-      ["hero_headline", config.hero_headline || defaultConfig.hero_headline],
-      ["hero_subtext", config.hero_subtext || defaultConfig.hero_subtext],
-    ])
-  });
 }
 
 // INITIAL RENDER
