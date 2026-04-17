@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>just LOVE &amp; café | Menu</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    html, body { height: 100%; margin: 0; scroll-behavior: smooth; }
+    .font-heading { font-family: 'DM Serif Display', serif; }
+    .font-body { font-family: 'Outfit', sans-serif; }
+    .product-card:hover .product-img { transform: scale(1.05); }
+    .product-img { transition: transform 0.6s cubic-bezier(0.22, 0.95, 0.36, 1); }
+    .fade-up { opacity: 0; transform: translateY(24px); animation: fadeUp 0.7s ease forwards; }
+    .fade-up-d1 { animation-delay: 0.1s; }
+    .fade-up-d2 { animation-delay: 0.2s; }
+    .fade-up-d3 { animation-delay: 0.3s; }
+    .fade-up-d4 { animation-delay: 0.4s; }
+    .fade-up-d5 { animation-delay: 0.5s; }
+    .fade-up-d6 { animation-delay: 0.6s; }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .nav-link { position: relative; }
+    .nav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1px; background: currentColor; transition: width 0.3s ease; }
+    .nav-link:hover::after { width:100%; }
+    .category-tab-active {
+      background: #2C2420;
+      color: #F6F1EB;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .category-tab-inactive {
+      background: rgba(44,36,32,0.05);
+      color: #2C2420;
+      backdrop-filter: blur(2px);
+    }
+    .category-tab-inactive:hover {
+      background: rgba(44,36,32,0.12);
+    }
+    /* Improved image sizing - consistent aspect ratio with proper fit */
+    .product-image-container {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      position: relative;
+    }
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.6s cubic-bezier(0.22, 0.95, 0.36, 1);
+    }
+    /* Larger text styles */
+    .product-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      line-height: 1.3;
+    }
+    .product-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #2C2420;
+    }
+    .product-weight {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: rgba(44,36,32,0.4);
+    }
+    .product-tasting {
+      font-size: 0.75rem;
+      color: rgba(44,36,32,0.5);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      .product-name { font-size: 1.25rem; }
+      .product-price { font-size: 1.2rem; }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full font-body bg-[#F6F1EB] text-[#2C2420] overflow-auto">
+  
+  <div class="w-full min-h-full flex flex-col">
+   <!-- Nav -->
+   <header class="w-full px-6 md:px-12 py-5 flex items-center justify-between fade-up">
+    <nav class="hidden md:flex gap-6 text-sm font-light tracking-wide"><a href="#shop" class="nav-link" onclick="scrollToShop(event)">Menu</a> <a href="#about" class="nav-link">About</a> <a href="#" class="nav-link">Journal</a>
+    </nav>
+    <div class="font-heading text-2xl tracking-tight" id="nav-brand">WELCOME</div> 
+    <div class="flex items-center gap-5"><button class="hover:opacity-60 transition"><i data-lucide="search" style="width:18px;height:18px;"></i></button></div>
+   </header>
+   
+   <!-- Hero Section with Background Image -->
+   <section class="relative w-full min-h-[75vh] flex items-center justify-center overflow-hidden rounded-b-[2rem] md:rounded-b-[3rem]">
+     <div class="absolute inset-0 w-full h-full" style="background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600&h=900&fit=crop'); background-size: cover; background-position: 45% 35%;">
+       <div class="absolute inset-0 bg-gradient-to-br from-[#F6F1EB]/70 via-[#F6F1EB]/40 to-transparent"></div>
+     </div>
+     <div class="relative z-10 w-full px-6 md:px-12 py-20 md:py-28 flex flex-col items-center text-center">
+       <p class="text-xs tracking-[0.3em] uppercase font-light mb-4 fade-up fade-up-d1 text-[#8B5E3C] bg-white/30 backdrop-blur-sm inline-block px-4 py-1 rounded-full">ROSELYN ADAJAR</p>
+       <h1 id="hero-title" class="font-heading text-5xl md:text-7xl lg:text-8xl leading-[0.95] mb-6 fade-up fade-up-d2 max-w-3xl drop-shadow-sm">Just Love <br>Café</h1>
+       <p id="hero-sub" class="text-base md:text-lg font-light max-w-md mb-10 fade-up fade-up-d3 text-[#2C2420]/80 bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full">Brewed with Love, Served with Heart 
+We're not fully open yet… but our cups are ready for you! 
+From our humble beginnings to your daily cravings,
+every cup is made with love and passion♥️</p>
+       <a href="#shop" onclick="scrollToShop(event)" class="fade-up fade-up-d4 inline-flex items-center gap-2 bg-[#2C2420] text-[#F6F1EB] px-8 py-3.5 rounded-full text-sm font-medium tracking-wide hover:bg-[#8B5E3C] transition-colors duration-300 shadow-lg"> Explore Menu <i data-lucide="arrow-right" style="width:16px;height:16px;"></i> </a>
+     </div>
+   </section>
+   
+   <!-- PRODUCT SECTION WITH CATEGORIES: COFFEE-BASED / NON-COFFEE / FOOD (VIEW ONLY) -->
+   <section id="shop" class="w-full px-6 md:px-12 py-12 md:py-20">
+    <div class="flex flex-col gap-4 items-start justify-between mb-10 fade-up fade-up-d4">
+     <div>
+      <p class="text-xs tracking-[0.3em] uppercase font-light mb-2 text-[#8B5E3C]">Our menu</p>
+      <h2 class="font-heading text-3xl md:text-4xl">Choose your ritual</h2>
+     </div>
+     <!-- Category Tabs (Coffee / Non-Coffee / Food) -->
+     <div class="flex gap-3 mt-2 border-b border-[#2C2420]/10 pb-2 w-full overflow-x-auto">
+       <button id="tab-coffee" onclick="setActiveCategory('coffee')" class="category-tab-active px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 shadow-sm">☕ Coffee-Based</button>
+       <button id="tab-noncoffee" onclick="setActiveCategory('noncoffee')" class="category-tab-inactive px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300">🍵 Non-Coffee Drinks</button>
+       <button id="tab-food" onclick="setActiveCategory('food')" class="category-tab-inactive px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300">🍽️ Food Menu</button>
+     </div>
+    </div>
+    
+    <!-- Dynamic Grid for Products (view-only, no add-to-cart) -->
+    <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"></div>
+   </section>
+   
+   <!-- About Section with Rich Visuals -->
+   <section id="about" class="w-full px-6 md:px-12 py-20 bg-[#2C2420]/[0.02]">
+    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+     <div class="rounded-2xl overflow-hidden shadow-xl h-80 md:h-[420px] w-full" style="background-image: url('ikit.jpg'); background-size: cover; background-position: center 30%;">
+     </div>
+     <div>
+      <p class="text-xs tracking-[0.3em] uppercase font-light mb-3 text-[#8B5E3C]">Our story</p>
+      <h2 class="font-heading text-3xl md:text-4xl mb-4">Mindful ingredients</h2>
+      <p class="font-light leading-relaxed text-[#2C2420]/70 mb-4">We believe in quality beyond coffee. Our non-coffee range uses ceremonial-grade matcha, organic cacao, and adaptogenic herbs — all sourced with the same ethical transparency as our single-origin beans.</p>
+      <div class="mt-6 flex gap-5">
+        <div><span class="block text-2xl font-heading text-[#8B5E3C]">100%</span><span class="text-xs uppercase tracking-wide">Organic options</span></div>
+        <div><span class="block text-2xl font-heading text-[#8B5E3C]">15+</span><span class="text-xs uppercase tracking-wide">Botanical blends</span></div>
+        <div><span class="block text-2xl font-heading text-[#8B5E3C]">0</span><span class="text-xs uppercase tracking-wide">Artificial syrups</span></div>
+      </div>
+     </div>
+    </div>
+   </section>
+   
+   <!-- Footer -->
+   <footer class="w-full px-6 md:px-12 py-10 mt-auto border-t border-[#2C2420]/10">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+     <div class="font-heading text-lg" id="footer-brand">just LOVE &amp; café</div>
+     <p class="text-xs font-light text-[#2C2420]/40">© 2026 All rights reserved</p>
+     <div class="flex gap-4"><a href="#" class="text-[#2C2420]/40 hover:text-[#2C2420] transition"><i data-lucide="instagram" style="width:16px;height:16px;"></i></a> <a href="#" class="text-[#2C2420]/40 hover:text-[#2C2420] transition"><i data-lucide="twitter" style="width:16px;height:16px;"></i></a>
+     </div>
+    </div>
+   </footer>
+  </div>
+  
+  <script>
+// ========== PRODUCTS: COFFEE-BASED + NON-COFFEE + FOOD MENU (PHP PESOS) - UNCHANGED ==========
+const coffeeProducts = [
+  { id: 101, name: "Oreo Latte", origin: "Coffee + Oreo)", price: 35, weight: "250g", tasting: "Sweet, Creamy, Cookie-like", roast: "Medium/Dark", tag: "Bestseller", category: "coffee", img: "oreolatte.jpg", typeLabel: "Flavored Latte" },
+  { id: 102, name: "Spanish Latte", origin: "Spain", price: 40, weight: "250g", tasting: "Sweet (Condensed Milk), Smooth", roast: "Medium/Dark", tag: "", category: "coffee", img: "spanish latte.jpg", typeLabel: "Latte (Condensed Milk)" },
+  { id: 103, name: "Mocha Latte", origin: "Guatemala", price: 50, weight: "250g", tasting: "Chocolatey, Rich, Sweet", roast: "Medium/Dark", tag: "New", category: "coffee", img: "mocha latte.jpg", typeLabel: "Chocolate Coffee" },
+];
+
+const nonCoffeeProducts = [
+  { id: 201, name: "Mocha Oreo", origin: "N/A", price: 30, weight: "50g", tasting: "Very Sweet, Cookies & Cream, Chocolate", roast: "", tag: "", category: "noncoffee", img: "Mocha Oreo.jpg", typeLabel: "Flavored Mocha" },
+  { id: 202, name: "Oreo Matcha", origin: "Japan (Matcha)", price: 45, weight: "120g", tasting: "Earthy, Sweet (Oreo), Creamy", roast: "", tag: "", category: "noncoffee", img: "Oreo Matcha.jpg", typeLabel: "Matcha Blend" },
+  { id: 203, name: "Oreo Milk", origin: "N/A", price: 45, weight: "200g", tasting: "Very Sweet, Cookies & Cream", roast: "", tag: "", category: "noncoffee", img: "Oreo Milk.jpg", typeLabel: "Milk Beverage" },
+  { id: 204, name: "Dark Chocolate Latte", origin: "Mesoamerica", price: 50, weight: "40g", tasting: "Bittersweet, Intense Chocolate", roast: "Medium/Dark", category: "noncoffee", img: "Dark Chocolate Latte.jpg", typeLabel: "Chocolate Coffee" },
+  { id: 205, name: "Matcha Latte", origin: "Japan", price: 35, weight: "80g", tasting: "Earthy, Vegetal, Creamy, Sweet", roast: "", tag: "", category: "noncoffee", img: "Matcha Latte.jpg", typeLabel: "Matcha Milk" },
+  { id: 206, name: "Mango Smoothie-Fresh Mango", origin: "Tropical (Mango)", price: 45, weight: "50g", tasting: "Sweet, Tangy, Fruity", roast: "", tag: "", category: "noncoffee", img: "Mango Smoothie.jpg", typeLabel: "Fruit Smoothie" },
+  { id: 207, name: "Fresh Strawberry Latte", origin: "Tropical (Strawberry)", price: 45, weight: "50g", tasting: "Natural sweet, slightly tart, creamy", roast: "", tag: "", category: "noncoffee", img: "strawberry.jpg", typeLabel: "Fruit Milk" }
+];
+
+const foodProducts = [
+  { id: 301, name: "Cassava", origin: "Filipino", price: 55, weight: "1 order", tasting: "Creamy, buttery, slightly sweet with cheese topping", tag: "Best Seller", category: "food", img: "cassava.jpg", typeLabel: "Filipino Delight" },
+  { id: 307, name: "Mango Float", origin: "Filipino", price: 65, weight: "1 order", tasting: "Creamy layers of graham, ripe mango, and whipped cream", tag: "Best Seller", category: "food", img: "float.jpg", typeLabel: "Filipino Dessert" },
+  { id: 308, name: "Biko", origin: "Filipino", price: 50, weight: "1 order", tasting: "Sweet sticky rice with caramelized latik topping", tag: "Traditional", category: "food", img: "biko.jpg", typeLabel: "Filipino Rice Cake" },
+  { id: 309, name: "Baked Lasagna", origin: "Italian-Filipino", price: 89, weight: "1 order", tasting: "Savory, cheesy, rich meat sauce", tag: "Hearty Meal", category: "food", img: "lasagna.jpg", typeLabel: "Pasta Bake" },
+  { id: 310, name: "Maja Blanca", origin: "Filipino", price: 50, weight: "1 order", tasting: "Creamy coconut pudding with corn and latik", tag: "", category: "food", img: "maja.jpg", typeLabel: "Filipino Pudding" },
+  { id: 311, name: "Filipino Spaghetti", origin: "Italian-Filipino", price: 85, weight: "1 order", tasting: "Sweet-savory tomato sauce with hotdog, ham, and cheese", tag: "Filipino Favorite", category: "food", img: "spaghetti.jpg", typeLabel: "Pasta" }
+];
+
+let activeCategory = "coffee";
+
+function getActiveProducts() {
+  if (activeCategory === "coffee") return coffeeProducts;
+  if (activeCategory === "noncoffee") return nonCoffeeProducts;
+  return foodProducts;
+}
+
+function setActiveCategory(cat) {
+  activeCategory = cat;
+  const coffeeTab = document.getElementById('tab-coffee');
+  const nonCoffeeTab = document.getElementById('tab-noncoffee');
+  const foodTab = document.getElementById('tab-food');
+  
+  if (coffeeTab && nonCoffeeTab && foodTab) {
+    coffeeTab.classList.remove('category-tab-active');
+    coffeeTab.classList.add('category-tab-inactive');
+    nonCoffeeTab.classList.remove('category-tab-active');
+    nonCoffeeTab.classList.add('category-tab-inactive');
+    foodTab.classList.remove('category-tab-active');
+    foodTab.classList.add('category-tab-inactive');
+    
+    if (cat === 'coffee') {
+      coffeeTab.classList.add('category-tab-active');
+      coffeeTab.classList.remove('category-tab-inactive');
+    } else if (cat === 'noncoffee') {
+      nonCoffeeTab.classList.add('category-tab-active');
+      nonCoffeeTab.classList.remove('category-tab-inactive');
+    } else if (cat === 'food') {
+      foodTab.classList.add('category-tab-active');
+      foodTab.classList.remove('category-tab-inactive');
+    }
+  }
+  renderProducts();
+}
+
+function scrollToShop(e) { 
+  if(e) e.preventDefault(); 
+  document.getElementById('shop').scrollIntoView({behavior:'smooth'}); 
+}
+
+// VIEW-ONLY RENDER: with properly sized images and larger fonts
+function renderProducts() {
+  const grid = document.getElementById('product-grid');
+  if (!grid) return;
+  const productsToShow = getActiveProducts();
+  
+  grid.innerHTML = productsToShow.map((p, idx) => {
+    let originText = "";
+    if (activeCategory === "coffee") originText = p.origin;
+    else if (activeCategory === "noncoffee") originText = p.typeLabel;
+    else originText = p.typeLabel;
+    
+    const tagHtml = p.tag ? `<span class="absolute top-3 left-3 bg-[#8B5E3C] text-[#F6F1EB] text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-full shadow-md z-10 font-medium">${p.tag}</span>` : '';
+    return `
+      <div class="product-card group fade-up" style="animation-delay:${(idx % 4) * 0.08}s">
+        <div class="product-image-container relative bg-gradient-to-br from-amber-50/30 to-[#2C2420]/[0.02] rounded-2xl mb-4 overflow-hidden shadow-sm transition-shadow duration-300">
+          <img src="${p.img}" alt="${p.name}" class="product-img w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent pointer-events-none"></div>
+          ${tagHtml}
+          <div class="absolute bottom-3 left-3 bg-white/80 backdrop-blur-sm rounded-full px-2.5 py-1 text-[11px] font-semibold text-[#2C2420]/80 shadow-sm">${originText}</div>
+        </div>
+        <div class="px-1">
+          <h3 class="product-name font-heading text-lg md:text-xl font-semibold mb-1 leading-tight">${p.name}</h3>
+          <p class="product-tasting text-xs md:text-sm text-[#2C2420]/60 mb-2 line-clamp-2">${p.tasting || (activeCategory==='food' ? 'Made fresh daily' : (p.category==='noncoffee' ? 'Organic & pure' : 'Freshly roasted'))}</p>
+          <div class="flex items-baseline justify-between flex-wrap gap-1 mt-1">
+            <span class="product-price text-base md:text-lg font-bold text-[#2C2420]">₱${p.price.toFixed(2)}</span>
+            <span class="product-weight text-[11px] md:text-xs text-[#2C2420]/40 font-light">/ ${p.weight}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  lucide.createIcons();
+}
+
+// INITIAL RENDER
+setActiveCategory('coffee');
+lucide.createIcons();
+</script>
+ </body>
+</html>
+```
