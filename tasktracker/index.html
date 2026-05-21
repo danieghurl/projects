@@ -425,7 +425,7 @@
     const doneTasks = document.getElementById("doneTasks");
     const leftTasks = document.getElementById("leftTasks");
 
-    let tasks = [
+    const defaultTasks = [
       { name: "Check emails", completed: true },
       { name: "Review schedule", completed: true },
       { name: "Plan priorities", completed: true },
@@ -443,7 +443,14 @@
       { name: "End-day review", completed: false }
     ];
 
+    let tasks = JSON.parse(localStorage.getItem("pinkTaskTrackerTasks")) || defaultTasks;
+
+    function saveTasks() {
+      localStorage.setItem("pinkTaskTrackerTasks", JSON.stringify(tasks));
+    }
+
     function renderTasks() {
+      saveTasks();
       taskList.innerHTML = "";
 
       tasks.forEach((task, index) => {
