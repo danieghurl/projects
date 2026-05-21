@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pink Task Tracker</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #fff1f7;
+      color: #3b2430;
+      padding: 30px 15px;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: auto;
+      background: #ffffff;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 14px 35px rgba(219, 39, 119, 0.16);
+      border: 1px solid #fbcfe8;
+    }
+
+    .title {
+      text-align: center;
+      padding: 25px 15px 15px;
+      color: #db2777;
+      font-size: 34px;
+      font-weight: 800;
+    }
+
+    .top-bar {
+      display: grid;
+      grid-template-columns: 70px 1fr 110px 110px 1.3fr;
+      background: #be185d;
+      color: white;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .top-bar > div {
+      padding: 14px 10px;
+      border-right: 2px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .top-bar > div:last-child {
+      border-right: none;
+    }
+
+    .progress-head {
+      display: grid;
+      grid-template-rows: auto auto;
+      padding: 0 !important;
+    }
+
+    .progress-title {
+      padding: 8px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .progress-labels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .progress-labels span {
+      padding: 8px;
+    }
+
+    .progress-labels span:first-child {
+      border-right: 2px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .progress-percent {
+      display: grid;
+      grid-template-columns: 70px 1fr 110px 110px 1.3fr;
+      background: #fbcfe8;
+      font-size: 28px;
+      font-weight: 800;
+      text-align: center;
+      color: #831843;
+    }
+
+    .progress-percent .empty {
+      background: #ffffff;
+    }
+
+    .progress-values {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column: 5 / 6;
+    }
+
+    .progress-values div {
+      padding: 18px 10px;
+    }
+
+    .main {
+      display: grid;
+      grid-template-columns: 70px 1fr 110px 110px 1.3fr;
+      min-height: 560px;
+    }
+
+    .task-list {
+      grid-column: 1 / 5;
+      border-right: 1px solid #f9a8d4;
+    }
+
+    .task-row {
+      display: grid;
+      grid-template-columns: 70px 1fr 110px 110px;
+      min-height: 45px;
+      border-bottom: 1px solid #fbcfe8;
+      align-items: center;
+    }
+
+    .task-row div {
+      padding: 10px;
+      border-right: 1px solid #fbcfe8;
+    }
+
+    .task-row div:last-child {
+      border-right: none;
+    }
+
+    .serial {
+      text-align: center;
+      font-weight: 700;
+      color: #831843;
+    }
+
+    .task-name {
+      font-weight: 600;
+    }
+
+    .task-name.done {
+      color: #be7aa0;
+      text-decoration: line-through;
+    }
+
+    .status,
+    .delete-cell {
+      text-align: center;
+    }
+
+    .status button {
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      border: 2px solid #f472b6;
+      background: white;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 800;
+      color: white;
+      transition: 0.2s;
+    }
+
+    .status button.completed {
+      background: #ec4899;
+      border-color: #ec4899;
+    }
+
+    .delete-task {
+      border: none;
+      border-radius: 999px;
+      background: #ffe4ef;
+      color: #be185d;
+      padding: 7px 12px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .delete-task:hover {
+      background: #db2777;
+      color: white;
+    }
+
+    .chart-area {
+      grid-column: 5 / 6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
+
+    .donut-wrap {
+      position: relative;
+      width: 260px;
+      height: 260px;
+    }
+
+    .donut {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .track {
+      fill: none;
+      stroke: #fce7f3;
+      stroke-width: 22;
+    }
+
+    .progress {
+      fill: none;
+      stroke: #ec4899;
+      stroke-width: 22;
+      stroke-linecap: round;
+      stroke-dasharray: 339.292;
+      stroke-dashoffset: 339.292;
+      transition: stroke-dashoffset 0.4s ease;
+    }
+
+    .donut-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      font-weight: 800;
+      color: #be185d;
+    }
+
+    .controls {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 12px;
+      background: #fff7fb;
+      border-top: 1px solid #fbcfe8;
+    }
+
+    input {
+      min-height: 44px;
+      border: 1px solid #f9a8d4;
+      border-radius: 12px;
+      padding: 0 15px;
+      font-size: 16px;
+      outline: none;
+      color: #831843;
+    }
+
+    input:focus {
+      border-color: #db2777;
+      box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.15);
+    }
+
+    .btn {
+      border: none;
+      border-radius: 12px;
+      padding: 0 18px;
+      font-weight: 700;
+      cursor: pointer;
+      color: white;
+      background: #db2777;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #be185d;
+    }
+
+    .btn.delete {
+      background: #9f1239;
+    }
+
+    .btn.delete:hover {
+      background: #881337;
+    }
+
+    .summary {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 18px;
+      background: #ffffff;
+      border-top: 1px solid #fbcfe8;
+      flex-wrap: wrap;
+    }
+
+    .summary-card {
+      min-width: 140px;
+      padding: 15px;
+      border-radius: 14px;
+      background: #fce7f3;
+      text-align: center;
+    }
+
+    .summary-card h3 {
+      font-size: 26px;
+      color: #db2777;
+    }
+
+    .summary-card p {
+      font-size: 13px;
+      color: #9d174d;
+      font-weight: 700;
+      margin-top: 5px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .top-bar,
+      .progress-percent,
+      .main {
+        grid-template-columns: 55px 1fr 80px 90px;
+      }
+
+      .top-bar .progress-head,
+      .progress-values,
+      .chart-area {
+        grid-column: 1 / -1;
+      }
+
+      .task-list {
+        grid-column: 1 / -1;
+        border-right: none;
+      }
+
+      .task-row {
+        grid-template-columns: 55px 1fr 80px 90px;
+      }
+
+      .chart-area {
+        min-height: 320px;
+      }
+
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        min-height: 44px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Pink Tasks Tracker</h1>
+
+    <div class="top-bar">
+      <div>S#</div>
+      <div>Activities</div>
+      <div>Status</div>
+      <div>Delete</div>
+      <div class="progress-head">
+        <div class="progress-title">Progress</div>
+        <div class="progress-labels">
+          <span>Completed</span>
+          <span>Incomplete</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="progress-percent">
+      <div class="empty"></div>
+      <div class="empty"></div>
+      <div class="empty"></div>
+      <div class="empty"></div>
+      <div class="progress-values">
+        <div id="completedPercent">0%</div>
+        <div id="incompletePercent">100%</div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="task-list" id="taskList"></div>
+
+      <div class="chart-area">
+        <div class="donut-wrap">
+          <svg class="donut" viewBox="0 0 140 140">
+            <circle class="track" cx="70" cy="70" r="54"></circle>
+            <circle class="progress" id="progressCircle" cx="70" cy="70" r="54"></circle>
+          </svg>
+          <div class="donut-text" id="donutText">0%</div>
+        </div>
+      </div>
+    </div>
+
+    <form class="controls" id="taskForm">
+      <input type="text" id="taskInput" placeholder="Enter a new task..." />
+      <button class="btn" type="submit">Add Task</button>
+      <button class="btn delete" type="button" id="clearDone">Clear Done</button>
+    </form>
+
+    <div class="summary">
+      <div class="summary-card">
+        <h3 id="totalTasks">0</h3>
+        <p>Total Tasks</p>
+      </div>
+      <div class="summary-card">
+        <h3 id="doneTasks">0</h3>
+        <p>Completed</p>
+      </div>
+      <div class="summary-card">
+        <h3 id="leftTasks">0</h3>
+        <p>Incomplete</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const taskList = document.getElementById("taskList");
+    const taskForm = document.getElementById("taskForm");
+    const taskInput = document.getElementById("taskInput");
+    const clearDone = document.getElementById("clearDone");
+    const completedPercent = document.getElementById("completedPercent");
+    const incompletePercent = document.getElementById("incompletePercent");
+    const donutText = document.getElementById("donutText");
+    const progressCircle = document.getElementById("progressCircle");
+    const totalTasks = document.getElementById("totalTasks");
+    const doneTasks = document.getElementById("doneTasks");
+    const leftTasks = document.getElementById("leftTasks");
+
+    const defaultTasks = [
+      { name: "Check emails", completed: true },
+      { name: "Review schedule", completed: true },
+      { name: "Plan priorities", completed: true },
+      { name: "Attend meetings", completed: false },
+      { name: "Update reports", completed: false },
+      { name: "Analyze data", completed: false },
+      { name: "Respond clients", completed: false },
+      { name: "Coordinate team", completed: false },
+      { name: "Track progress", completed: false },
+      { name: "Solve issues", completed: false },
+      { name: "Document work", completed: false },
+      { name: "Follow deadlines", completed: false },
+      { name: "Update records", completed: false },
+      { name: "Communicate", completed: false },
+      { name: "End-day review", completed: false }
+    ];
+
+    let tasks = JSON.parse(localStorage.getItem("pinkTaskTrackerTasks")) || defaultTasks;
+
+    function saveTasks() {
+      localStorage.setItem("pinkTaskTrackerTasks", JSON.stringify(tasks));
+    }
+
+    function renderTasks() {
+      saveTasks();
+      taskList.innerHTML = "";
+
+      tasks.forEach((task, index) => {
+        const row = document.createElement("div");
+        row.className = "task-row";
+
+        row.innerHTML = `
+          <div class="serial">${index + 1}</div>
+          <div class="task-name ${task.completed ? "done" : ""}">${task.name}</div>
+          <div class="status">
+            <button class="${task.completed ? "completed" : ""}" onclick="toggleTask(${index})">
+              ${task.completed ? "✓" : ""}
+            </button>
+          </div>
+          <div class="delete-cell">
+            <button class="delete-task" onclick="deleteTask(${index})">Delete</button>
+          </div>
+        `;
+
+        taskList.appendChild(row);
+      });
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const total = tasks.length;
+      const completed = tasks.filter(task => task.completed).length;
+      const incomplete = total - completed;
+      const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
+      const remainingPercent = 100 - percent;
+      const circumference = 339.292;
+      const offset = circumference - (percent / 100) * circumference;
+
+      completedPercent.textContent = percent + "%";
+      incompletePercent.textContent = remainingPercent + "%";
+      donutText.textContent = percent + "%";
+      progressCircle.style.strokeDashoffset = offset;
+
+      totalTasks.textContent = total;
+      doneTasks.textContent = completed;
+      leftTasks.textContent = incomplete;
+    }
+
+    function toggleTask(index) {
+      tasks[index].completed = !tasks[index].completed;
+      renderTasks();
+    }
+
+    function deleteTask(index) {
+      tasks.splice(index, 1);
+      renderTasks();
+    }
+
+    taskForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const value = taskInput.value.trim();
+
+      if (value === "") return;
+
+      tasks.push({ name: value, completed: false });
+      taskInput.value = "";
+      renderTasks();
+    });
+
+    clearDone.addEventListener("click", function() {
+      tasks = tasks.filter(task => !task.completed);
+      renderTasks();
+    });
+
+    renderTasks();
+  </script>
+</body>
+</html>
